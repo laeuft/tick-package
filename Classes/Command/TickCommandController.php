@@ -61,8 +61,34 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 				$this->generateRandomTemplateName()
 			);
 
+			// add some task groups and tasks on them
+			for ($j = 0; $j < rand(0,8); $j++) {
+				$taskgroup = $this->createDummyTaskgroup(rand(4,10));
+				$template->addTaskgroup($taskgroup);
+			}
+
 			$this->templateRepository->add($template);
 		}
+	}
+
+	/**
+	 * Generates a dummy taskgroup containing a number of tasks with a random name
+	 * @param integer the number of tasks to generate
+	 * @return \Laeuft\Tick\Domain\Model\Taskgroup
+	 */
+	protected function createDummyTaskgroup($numberOfTasks) {
+		$taskgroup = new \Laeuft\Tick\Domain\Model\Taskgroup();
+
+		for ($i = 0; $i < $numberOfTasks; $i++) {
+			$task = new \Laeuft\Tick\Domain\Model\Task();
+			$task->setName(
+				$this->generateRandomTaskName()
+			);
+
+			$taskgroup->addTask($task);
+		}
+
+		return $taskgroup;
 	}
 
 	/**
@@ -71,6 +97,21 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	 * @return string a random name
 	 */
 	protected function generateRandomTemplateName() {
+		$name = $this->getRandomArrayEntry(
+			$this->randomWords
+		) . ' ' . $this->getRandomArrayEntry(
+			$this->randomVerbs
+		);
+
+		return $name;
+	}
+
+	/**
+	 * Generates a random name for a task, consisting of a word and a verb
+	 *
+	 * @return string a random name
+	 */
+	protected function generateRandomTaskName() {
 		$name = $this->getRandomArrayEntry(
 			$this->randomWords
 		) . ' ' . $this->getRandomArrayEntry(
