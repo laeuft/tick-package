@@ -1,0 +1,16 @@
+To be done until v1.0.0
+-----------------------
+- add footer to the default layout
+- decide on license
+- add license information
+- functionality
+	- login
+	- user registration (???)
+	- dashboard view
+	- create template
+	- create checklist
+	- finish checklist
+- overall styling of the application
+- testing of the application
+- prepare distribution
+- write installation instructions
