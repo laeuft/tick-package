@@ -4,11 +4,41 @@
 		<meta charset="utf-8">
 		<title><f:render section="Title" /></title>
 		<f:base />
+		<link rel="stylesheet/less" href="{f:uri.resource(path:'res/bootstrap/less/bootstrap.less')}">
+		<link rel="stylesheet/less" href="{f:uri.resource(path:'CSS/tick.less')}">
+		<script src="{f:uri.resource(path:'res/less.js/less-1.3.0.min.js')}"></script>
 	</head>
 	<body>
-		<f:flashMessages class="flashmessages" />
 
-		<h1><f:render section="Title" /></h1>
-		<f:render section="Content" />
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="/">
+						Tick
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1><f:render section="Title" /></h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span12">
+					<f:flashMessages class="flashmessages" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span12">
+					<f:render section="Content" />
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
