@@ -10,8 +10,8 @@
 					<ul>
 						<f:for each="{templates}" as="template">
 							<li>
-								<f:link.action action="show" controller="Template" arguments="{template: template}">{checklist.name}</f:link.action>
-								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-small btn-success">
+								<f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
+								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
 									Start
 								</f:link.action>
 							</li>
