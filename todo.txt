@@ -1,6 +1,8 @@
 To be done until v1.0.0
 -----------------------
 - add footer to the default layout
+- remove all unused controllers (incl. their templates)
+- remove all unused controller-metehods (inkl. their templates)
 - decide on license
 - add license information
 - functionality
@@ -8,7 +10,14 @@ To be done until v1.0.0
 	- user registration (???)
 	- dashboard view
 	- create template
-	- create checklist
+	- add taskgroup to template
+	- add task to taskgroup
+	- create checklist based on a template
+	- show checklist with all taskgroups and tasks in it
+	- tick off tasks in a checklist
+		- via javascript (???)
+		- persisted in the database
+	- show progress bar on top of a checklsit
 	- finish checklist
 - overall styling of the application
 - testing of the application
