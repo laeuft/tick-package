@@ -1,0 +1,43 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Tick: Welcome</f:section>
+
+<f:section name="Content">
+
+	<f:if condition="{templates}">
+		<f:then>
+			<ul>
+				<f:for each="{templates}" as="template">
+					<li>
+						<f:link.action action="show" arguments="{template: template}">{checklist.name}</f:link.action>
+						<f:link.action action="edit" arguments="{template: template}">Edit</f:link.action>
+						<f:link.action action="delete" arguments="{template: template}">Delete</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:then>
+		<f:else>
+			<p>No templates created yet.</p>
+		</f:else>
+	</f:if>
+	<p><f:link.action action="new">Create a new checklist</f:link.action></p>
+
+
+	<f:if condition="{checklists}">
+		<f:then>
+			<ul>
+				<f:for each="{checklists}" as="checklist">
+					<li>
+						<f:link.action action="show" arguments="{checklist: checklist}">{checklist.name}</f:link.action>
+						<f:link.action action="edit" arguments="{checklist: checklist}">Edit</f:link.action>
+						<f:link.action action="delete" arguments="{checklist: checklist}">Delete</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:then>
+		<f:else>
+			<p>No checklists created yet.</p>
+		</f:else>
+	</f:if>
+	<p><f:link.action action="new">Create a new checklist</f:link.action></p>
+</f:section>
