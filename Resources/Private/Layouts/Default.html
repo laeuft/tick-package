@@ -20,9 +20,23 @@
 			</div>
 		</div>
 
-		<f:flashMessages class="flashmessages" />
 
-		<h1><f:render section="Title" /></h1>
-		<f:render section="Content" />
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1><f:render section="Title" /></h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span12">
+					<f:flashMessages class="flashmessages" />
+				</div>
+			</div>
+
+			<div class="row">
+				<f:render section="Content" />
+			</div>
+		</div>
 	</body>
 </html>
