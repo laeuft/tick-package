@@ -53,6 +53,11 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		'umsetzen'
 	);
 
+	/**
+	 * @var string some dummy text for descriptions
+	 */
+	protected $dummyText = 'Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit. Lorem ipsum dolor sit amet. Consectetuer adispiscint elit.';
+
 
 	/**
 	 * @FLOW3\Inject
@@ -100,15 +105,44 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		$taskgroup = new \Laeuft\Tick\Domain\Model\Taskgroup();
 
 		for ($i = 0; $i < $numberOfTasks; $i++) {
-			$task = new \Laeuft\Tick\Domain\Model\Task();
-			$task->setName(
-				$this->generateRandomTaskName()
+			$taskgroup->addTask(
+				$this->createDummyTask()
 			);
-
-			$taskgroup->addTask($task);
 		}
 
 		return $taskgroup;
+	}
+
+	/**
+	 * Creates a dummy task with name and by chance also a description
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Task a task
+	 */
+	protected function createDummyTask() {
+		$task = new \Laeuft\Tick\Domain\Model\Task();
+		$task->setName(
+			$this->generateRandomTaskName()
+		);
+
+		// on a certain chance, add an (optional) description
+		if (rand(0,20) % 4) {
+			$task->setDescription(
+				$this->generateRandomDescription()
+			);
+		}
+
+		return $task;
+	}
+
+	/**
+	 * Returns parts of the dummy text, 30 to 255 characters max
+	 * 
+	 * @return string some foobar text of random length
+	 */
+	protected function generateRandomDescription() {
+		$description = substr($this->dummyText, 0, rand(30,255));
+
+		return $description;
 	}
 
 	/**
