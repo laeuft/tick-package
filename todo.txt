@@ -23,3 +23,8 @@ To be done until v1.0.0
 - testing of the application
 - prepare distribution
 - write installation instructions
+
+
+Future ideas
+------------
+- add some statistics
