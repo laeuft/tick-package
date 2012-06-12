@@ -31,10 +31,15 @@ class Taskgroup {
 
 	/**
 	 * The tasks
-	 * @var \Laeuft\Tick\Domain\Model\Task
+	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Task>
 	 * @ORM\OneToMany(mappedBy="taskgroup")
 	 */
 	protected $tasks;
+
+
+	public function __construct() {
+		$this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 
 	/**
@@ -92,6 +97,15 @@ class Taskgroup {
 	 */
 	public function setTasks($tasks) {
 		$this->tasks = $tasks;
+	}
+
+	/**
+	 * Adds an additional task to this taskgroup
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Task the task
+	 */
+	public function addTask(\Laeuft\Tick\Domain\Model\Task $task) {
+		$this->tasks->add($task);
 	}
 
 }
