@@ -105,6 +105,7 @@ class Taskgroup {
 	 * @param \Laeuft\Tick\Domain\Model\Task the task
 	 */
 	public function addTask(\Laeuft\Tick\Domain\Model\Task $task) {
+		$task->setTaskgroup($this);
 		$this->tasks->add($task);
 	}
 

@@ -61,12 +61,6 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	protected $templateRepository;
 
 	/**
-	 * @FLOW3\Inject
-	 * @var \Laeuft\Tick\Domain\Repository\TaskgroupRepository
-	 */
-	protected $taskgroupRepository;
-
-	/**
 	 * Initialize Command
 	 *
 	 * This will initialize a bunch of templates, and checklists. Just a random collection
@@ -90,7 +84,6 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 				$taskgroup->setName(
 					$this->generateRandomTaskgroupName()
 				);
-				$this->taskgroupRepository->add($taskgroup);
 				$template->addTaskgroup($taskgroup);
 			}
 

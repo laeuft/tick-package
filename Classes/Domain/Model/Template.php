@@ -25,7 +25,7 @@ class Template {
 	/**
 	 * The taskgroups
 	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Taskgroup>
-	 * @ORM\OneToMany(mappedBy="template")
+	 * @ORM\OneToMany(mappedBy="template",cascade="persist")
 	 */
 	protected $taskgroups;
 
@@ -79,6 +79,7 @@ class Template {
 	 * @param $taskgroup
 	 */
 	public function addTaskgroup(\Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
+		$taskgroup->setTemplate($this);
 		$this->taskgroups->add($taskgroup);
 	}
 
