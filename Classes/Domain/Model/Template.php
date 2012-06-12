@@ -24,10 +24,15 @@ class Template {
 
 	/**
 	 * The taskgroups
-	 * @var \Laeuft\Tick\Domain\Model\Taskgroup
+	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Taskgroup>
 	 * @ORM\OneToMany(mappedBy="template")
 	 */
 	protected $taskgroups;
+
+
+	public function __construct() {
+		$this->taskgroups = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 
 	/**
@@ -66,6 +71,15 @@ class Template {
 	 */
 	public function setTaskgroups($taskgroups) {
 		$this->taskgroups = $taskgroups;
+	}
+
+	/**
+	 * Adds a taskgroup to this template
+	 *
+	 * @param $taskgroup
+	 */
+	public function addTaskgroup(\Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
+		$this->taskgroups->add($taskgroup);
 	}
 
 }
