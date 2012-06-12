@@ -32,7 +32,7 @@ class Taskgroup {
 	/**
 	 * The tasks
 	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Task>
-	 * @ORM\OneToMany(mappedBy="taskgroup")
+	 * @ORM\OneToMany(mappedBy="taskgroup",cascade="persist")
 	 */
 	protected $tasks;
 
