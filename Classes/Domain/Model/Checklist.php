@@ -7,39 +7,117 @@ namespace Laeuft\Tick\Domain\Model;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A Checklist
  *
- * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
  */
 class Checklist {
 
 	/**
-	 * The name
+	 * The template
+	 * @var \Laeuft\Tick\Domain\Model\Template
+	 * @ORM\ManyToOne
+	 */
+	protected $template;
+
+	/**
+	 * The project id
 	 * @var string
 	 */
-	protected $name;
+	protected $projectId;
+
+	/**
+	 * The owner
+	 * @var \Laeuft\Tick\Domain\Model\User
+	 * @ORM\ManyToOne(inversedBy="checklists")
+	 */
+	protected $owner;
+
+	/**
+	 * The ticks
+	 * @var \Laeuft\Tick\Domain\Model\Tick
+	 * @ORM\OneToMany(mappedBy="checklist")
+	 */
+	protected $ticks;
 
 
 	/**
-	 * Get the Checklist's name
+	 * Get the Checklist's template
 	 *
-	 * @return string The Checklist's name
+	 * @return \Laeuft\Tick\Domain\Model\Template The Checklist's template
 	 */
-	public function getName() {
-		return $this->name;
+	public function getTemplate() {
+		return $this->template;
 	}
 
 	/**
-	 * Sets this Checklist's name
+	 * Sets this Checklist's template
 	 *
-	 * @param string $name The Checklist's name
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The Checklist's template
 	 * @return void
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setTemplate($template) {
+		$this->template = $template;
+	}
+
+	/**
+	 * Get the Checklist's project id
+	 *
+	 * @return string The Checklist's project id
+	 */
+	public function getProjectId() {
+		return $this->projectId;
+	}
+
+	/**
+	 * Sets this Checklist's project id
+	 *
+	 * @param string $projectId The Checklist's project id
+	 * @return void
+	 */
+	public function setProjectId($projectId) {
+		$this->projectId = $projectId;
+	}
+
+	/**
+	 * Get the Checklist's owner
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\User The Checklist's owner
+	 */
+	public function getOwner() {
+		return $this->owner;
+	}
+
+	/**
+	 * Sets this Checklist's owner
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\User $owner The Checklist's owner
+	 * @return void
+	 */
+	public function setOwner($owner) {
+		$this->owner = $owner;
+	}
+
+	/**
+	 * Get the Checklist's ticks
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Tick The Checklist's ticks
+	 */
+	public function getTicks() {
+		return $this->ticks;
+	}
+
+	/**
+	 * Sets this Checklist's ticks
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Tick $ticks The Checklist's ticks
+	 * @return void
+	 */
+	public function setTicks($ticks) {
+		$this->ticks = $ticks;
 	}
 
 }
