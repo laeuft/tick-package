@@ -7,11 +7,11 @@ namespace Laeuft\Tick\Domain\Model;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A Taskgroup
  *
- * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
  */
 class Taskgroup {
@@ -21,6 +21,20 @@ class Taskgroup {
 	 * @var string
 	 */
 	protected $name;
+
+	/**
+	 * The template
+	 * @var \Laeuft\Tick\Domain\Model\Template
+	 * @ORM\ManyToOne(inversedBy="taskgroups")
+	 */
+	protected $template;
+
+	/**
+	 * The tasks
+	 * @var \Laeuft\Tick\Domain\Model\Task
+	 * @ORM\OneToMany(mappedBy="taskgroup")
+	 */
+	protected $tasks;
 
 
 	/**
@@ -40,6 +54,44 @@ class Taskgroup {
 	 */
 	public function setName($name) {
 		$this->name = $name;
+	}
+
+	/**
+	 * Get the Taskgroup's template
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Template The Taskgroup's template
+	 */
+	public function getTemplate() {
+		return $this->template;
+	}
+
+	/**
+	 * Sets this Taskgroup's template
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The Taskgroup's template
+	 * @return void
+	 */
+	public function setTemplate($template) {
+		$this->template = $template;
+	}
+
+	/**
+	 * Get the Taskgroup's tasks
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Task The Taskgroup's tasks
+	 */
+	public function getTasks() {
+		return $this->tasks;
+	}
+
+	/**
+	 * Sets this Taskgroup's tasks
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Task $tasks The Taskgroup's tasks
+	 * @return void
+	 */
+	public function setTasks($tasks) {
+		$this->tasks = $tasks;
 	}
 
 }
