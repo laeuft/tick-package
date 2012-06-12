@@ -6,6 +6,9 @@ To be done until v1.0.0
 - decide on license
 - add license information
 - functionality
+	- finish the initialize command controller
+	- make sure the initialize command controller shows progress during it's run
+	- add unit tests for the whole domain models
 	- login
 	- user registration (???)
 	- dashboard view
