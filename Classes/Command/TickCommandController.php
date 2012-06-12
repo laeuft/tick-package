@@ -24,6 +24,11 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		'Mittagessen',
 		'Website',
 		'Onlineshop',
+		'Haus',
+		'Musik',
+		'Fisch',
+		'Hausputz',
+		'Konzept',
 	);
 
 	/**
@@ -50,7 +55,15 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		'anpassen',
 		'abschliessen',
 		'erstellen',
-		'umsetzen'
+		'umsetzen',
+		'essen',
+		'verbiegen',
+		'machen',
+		'erledigen',
+		'reparieren',
+		'zeichnen',
+		'verstehen',
+		'messen',
 	);
 
 	/**
@@ -136,7 +149,7 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 
 	/**
 	 * Returns parts of the dummy text, 30 to 255 characters max
-	 * 
+	 *
 	 * @return string some foobar text of random length
 	 */
 	protected function generateRandomDescription() {
