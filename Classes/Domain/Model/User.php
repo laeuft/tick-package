@@ -7,11 +7,11 @@ namespace Laeuft\Tick\Domain\Model;
  *                                                                        */
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A User
  *
- * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
  */
 class User {
@@ -21,6 +21,13 @@ class User {
 	 * @var string
 	 */
 	protected $name;
+
+	/**
+	 * The checklists
+	 * @var \Laeuft\Tick\Domain\Model\Checklist
+	 * @ORM\OneToMany(mappedBy="checklist")
+	 */
+	protected $checklists;
 
 
 	/**
@@ -40,6 +47,25 @@ class User {
 	 */
 	public function setName($name) {
 		$this->name = $name;
+	}
+
+	/**
+	 * Get the User's checklists
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Checklist The User's checklists
+	 */
+	public function getChecklists() {
+		return $this->checklists;
+	}
+
+	/**
+	 * Sets this User's checklists
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklists The User's checklists
+	 * @return void
+	 */
+	public function setChecklists($checklists) {
+		$this->checklists = $checklists;
 	}
 
 }
