@@ -8,11 +8,13 @@ To be done until v1.0.0
 - functionality
 	- finish the initialize command controller
 	- make sure the initialize command controller shows progress during it's run
+	- make sure the flash messages are only either in the layout or the template (see b6f124e38a37c7b730513086013b03329c8b92c3)
 	- add unit tests for the whole domain models
 	- login
 	- user registration (???)
 	- dashboard view
 	- create template
+		- why not return to the detail view of the template instead of the standard/index action? (see 407456f4f0e64fba428ae978142014e2ef9ea23a)
 	- add taskgroup to template
 	- add task to taskgroup
 	- create checklist based on a template
