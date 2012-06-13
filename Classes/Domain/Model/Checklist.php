@@ -38,11 +38,15 @@ class Checklist {
 
 	/**
 	 * The ticks
-	 * @var \Laeuft\Tick\Domain\Model\Tick
-	 * @ORM\OneToMany(mappedBy="checklist")
+	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Tick>
+	 * @ORM\OneToMany(mappedBy="checklist",cascade="persist")
 	 */
 	protected $ticks;
 
+
+	public function __construct() {
+		$this->ticks = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 	/**
 	 * Get the Checklist's template
@@ -118,6 +122,16 @@ class Checklist {
 	 */
 	public function setTicks($ticks) {
 		$this->ticks = $ticks;
+	}
+
+	/**
+	 * Adds a single tick to this checklist
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Tick a tick
+	 */
+	public function addTick(\Laeuft\Tick\Domain\Model\Tick $tick) {
+		$tick->setChecklist($this);
+		$this->ticks->add($tick);
 	}
 
 }

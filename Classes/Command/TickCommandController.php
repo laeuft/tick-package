@@ -85,6 +85,12 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	protected $checklistRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \TYPO3\FLOW3\Persistence\Doctrine\PersistenceManager
+	 */
+	protected $persistenceManager;
+
+	/**
 	 * Initialize Command
 	 *
 	 * This will initialize a bunch of templates, and checklists. Just a random collection
@@ -114,6 +120,8 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 			$this->templateRepository->add($template);
 		}
 
+		$this->persistenceManager->persistAll();
+
 		// create some checklists
 		for ($i = 0; $i < 10; $i++) {
 			$this->checklistRepository->add(
@@ -129,13 +137,36 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	 */
 	protected function createDummyChecklist() {
 		$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
+
+		$template = $this->templateRepository->findOneRandom();
 		$checklist->setTemplate(
-			$this->templateRepository->findOneRandom()
+			$template
 		);
 		$checklist->setProjectId(
 			$this->generateRandomProjectId()
 		);
 		// TODO: Add an owner!
+
+		// pick some of the tasks and create a tick on them
+		while ($checklist->getTemplate()->getTaskgroups()->current()) {
+			  $taskgroup = $checklist->getTemplate()->getTaskgroups()->current();
+			  while($taskgroup->getTasks()->current()) {
+				  if (rand(0,20) %6) {
+
+					  $task = $taskgroup->getTasks()->current();
+					  $tick = new \Laeuft\Tick\Domain\Model\Tick();
+					  $tick->setTask($task);
+					  $tick->setDate(new \DateTime());
+					  // TODO: Set the user!
+
+					  $checklist->addTick($tick);
+				  }
+
+				  $taskgroup->getTasks()->next();
+			  }
+
+			  $checklist->getTemplate()->getTaskgroups()->next();
+		  }
 
 		return $checklist;
 	}
