@@ -99,35 +99,52 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	 * @return void
 	 */
 	public function initializeCommand() {
-		$this->outputLine('Hello, I\'m James and I\'ll prepare some dummy data for you :-)');
+		echo('Hello, I\'m James and I\'ll prepare some dummy data for you :-)' . PHP_EOL);
 
 		// create some templates
-		for ($i = 0; $i < 8; $i++) {
+		for ($i = 0; $i < rand(5,10); $i++) {
 			$template = new \Laeuft\Tick\Domain\Model\Template();
 			$template->setName(
 				$this->generateRandomTemplateName()
 			);
 
 			// add some task groups and tasks on them
-			for ($j = 0; $j < rand(0,8); $j++) {
+			$numberOfTasks = 0;
+			for ($j = 0; $j < rand(5,14); $j++) {
 				$taskgroup = $this->createDummyTaskgroup(rand(4,10));
 				$taskgroup->setName(
 					$this->generateRandomTaskgroupName()
 				);
 				$template->addTaskgroup($taskgroup);
+				$numberOfTasks += $j;
 			}
 
 			$this->templateRepository->add($template);
 		}
 
+		echo('Created ' . $i . ' templates with a total of ' . $numberOfTasks . ' tasks.' . PHP_EOL);
+		echo('Now going to persist them...' . PHP_EOL);
+
 		$this->persistenceManager->persistAll();
 
+
+		echo('Next up: Creating some started checklists based on the new templates...' . PHP_EOL);
 		// create some checklists
+		$numberOfTicks = 0;
 		for ($i = 0; $i < 10; $i++) {
+			$checklist = $this->createDummyChecklist();
+			$numberOfTicks += $checklist->getTicks()->count();
+
 			$this->checklistRepository->add(
-				$this->createDummyChecklist()
+				$checklist
 			);
 		}
+		echo('Created ' . $i . ' checklists with a total of ' . $numberOfTicks . ' ticks.' . PHP_EOL);
+
+		echo('Now going to persist them...' . PHP_EOL);
+		$this->persistenceManager->persistAll();
+
+		echo('Wohoo, we\'re through. Thanks for all the fish!' . PHP_EOL);
 	}
 
 	/**
@@ -151,7 +168,7 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		while ($checklist->getTemplate()->getTaskgroups()->current()) {
 			  $taskgroup = $checklist->getTemplate()->getTaskgroups()->current();
 			  while($taskgroup->getTasks()->current()) {
-				  if (rand(0,20) %6) {
+				  if (rand(0,20) %6 == 0) {
 
 					  $task = $taskgroup->getTasks()->current();
 					  $tick = new \Laeuft\Tick\Domain\Model\Tick();

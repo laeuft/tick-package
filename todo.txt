@@ -6,8 +6,6 @@ To be done until v1.0.0
 - decide on license
 - add license information
 - functionality
-	- finish the initialize command controller
-	- make sure the initialize command controller shows progress during it's run
 	- make sure the flash messages are only either in the layout or the template (see b6f124e38a37c7b730513086013b03329c8b92c3)
 	- add unit tests for the whole domain models
 	- login
@@ -24,6 +22,7 @@ To be done until v1.0.0
 		- persisted in the database
 	- show progress bar on top of a checklsit
 	- finish checklist
+- check code for TODOs
 - overall styling of the application
 - testing of the application
 - prepare distribution
