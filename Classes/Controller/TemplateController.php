@@ -12,7 +12,7 @@ use TYPO3\FLOW3\MVC\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Template;
 
 /**
- * Template controller for the Laeuft.Tick package 
+ * Template controller for the Laeuft.Tick package
  *
  * @FLOW3\Scope("singleton")
  */
@@ -60,7 +60,7 @@ class TemplateController extends ActionController {
 	public function createAction(Template $newTemplate) {
 		$this->templateRepository->add($newTemplate);
 		$this->addFlashMessage('Created a new template.');
-		$this->redirect('index');
+		$this->redirect('index', 'Standard');
 	}
 
 	/**
