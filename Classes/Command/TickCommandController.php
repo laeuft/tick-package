@@ -116,16 +116,27 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 
 		// create some checklists
 		for ($i = 0; $i < 10; $i++) {
-			$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
-			$checklist->setTemplate(
-				$this->templateRepository->findOneRandom()
+			$this->checklistRepository->add(
+				$this->createDummyChecklist()
 			);
-			$checklist->setProjectId(
-				$this->generateRandomProjectId()
-			);
-			// TODO: Add an owner!
-			$this->checklistRepository->add($checklist);
 		}
+	}
+
+	/**
+	 * Creates a dummy checklist
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Checklist
+	 */
+	protected function createDummyChecklist() {
+		$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
+		$checklist->setTemplate(
+			$this->templateRepository->findOneRandom()
+		);
+		$checklist->setProjectId(
+			$this->generateRandomProjectId()
+		);
+		// TODO: Add an owner!
+
 	}
 
 	/**
