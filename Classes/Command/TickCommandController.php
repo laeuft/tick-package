@@ -137,6 +137,7 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		);
 		// TODO: Add an owner!
 
+		return $checklist;
 	}
 
 	/**
