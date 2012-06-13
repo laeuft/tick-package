@@ -79,6 +79,12 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 	protected $templateRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\ChecklistRepository
+	 */
+	protected $checklistRepository;
+
+	/**
 	 * Initialize Command
 	 *
 	 * This will initialize a bunch of templates, and checklists. Just a random collection
@@ -106,6 +112,19 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 			}
 
 			$this->templateRepository->add($template);
+		}
+
+		// create some checklists
+		for ($i = 0; $i < 10; $i++) {
+			$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
+			$checklist->setTemplate(
+				$this->templateRepository->findOneRandom()
+			);
+			$checklist->setProjectId(
+				$this->generateRandomProjectId()
+			);
+			// TODO: Add an owner!
+			$this->checklistRepository->add($checklist);
 		}
 	}
 
@@ -156,6 +175,17 @@ class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandControlle
 		$description = substr($this->dummyText, 0, rand(30,255));
 
 		return $description;
+	}
+
+	/**
+	 * Generates a random dummy project number in the format 1056-25-01
+	 *
+	 * @return string a face project id
+	 */
+	protected function generateRandomProjectId() {
+		$id = rand(1111,9999) . '-' . rand(20,80) . '-0' . rand(1,9);
+
+		return $id;
 	}
 
 	/**

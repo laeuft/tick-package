@@ -15,7 +15,22 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class TemplateRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
-	// add customized methods here
+	/**
+	 * Selects one random template out of all templates
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Template
+	 */
+	public function findOneRandom() {
+		$allTemplates = $this->findAll();
+		$template = $allTemplates->offsetGet(
+			rand(
+				1,
+				$allTemplates->count()
+			)
+		);
+
+		return $template;
+	}
 
 }
 ?>
