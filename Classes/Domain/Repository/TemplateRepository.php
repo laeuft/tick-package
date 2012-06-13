@@ -25,7 +25,7 @@ class TemplateRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		$template = $allTemplates->offsetGet(
 			rand(
 				1,
-				$allTemplates->count()
+				$allTemplates->count() - 1
 			)
 		);
 
