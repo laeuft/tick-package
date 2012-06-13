@@ -22,7 +22,17 @@
 					<p>No templates created yet.</p>
 				</f:else>
 			</f:if>
-			<p><f:link.action action="new" controller="Template" class="btn btn-primary">Create a new template</f:link.action></p>
+			<p class="addTemplate">
+				<div class="btn btn-primary">Create a new template</div>
+				<f:form method="POST" action="create" object="{newTemplate}" controller="Template" name="newTemplate">
+					<div class="newTemplateFields">
+						<f:form.textfield property="name" id="name" />
+						<f:form.submit class="btn btn-mini btn-success" value="Create" />
+					</div>
+				</f:form>
+			</p>
+
+			<!--<p><f:link.action action="new" controller="Template" class="btn btn-primary">Create a new template</f:link.action></p>-->
 		</div>
 		<div class="span6">
 			<f:if condition="{checklists}">
