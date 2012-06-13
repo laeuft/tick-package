@@ -2,6 +2,8 @@
 
 <f:section name="Title">Tick: Welcome</f:section>
 
+<f:flashMessages class="flashmessages" />
+
 <f:section name="Content">
 	<div class="row">
 		<div class="span6">
@@ -23,8 +25,8 @@
 				</f:else>
 			</f:if>
 			<p class="addTemplate">
-				<div class="btn btn-primary">Create a new template</div>
-				<f:form method="POST" action="create" object="{newTemplate}" controller="Template" name="newTemplate">
+				<div id="showNewTemplateFields" class="btn btn-primary">Create a new template</div>
+				<f:form id="newTemplateForm" method="POST" action="create" object="{newTemplate}" controller="Template" name="newTemplate">
 					<div class="newTemplateFields">
 						<f:form.textfield property="name" id="name" />
 						<f:form.submit class="btn btn-mini btn-success" value="Create" />
