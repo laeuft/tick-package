@@ -53,8 +53,6 @@ class TemplateController extends ActionController {
 	 */
 	public function showAction(Template $template) {
 		$this->view->assign('template', $template);
-		$this->view->assign('taskgroups', $this->taskgroupRepository->findAll());
-		$this->view->assign('tasks', $this->taskRepository->findAll());
 	}
 
 	/**
