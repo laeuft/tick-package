@@ -12,13 +12,13 @@
 
 	<div class="row">
 		<div class="span6">
-			<f:if condition="{taskgroups}">
+			<f:if condition="{template.taskgroups}">
 				<f:then>
 					<ul>
-						<f:for each="{taskgroups}" as="taskgroup">
+						<f:for each="{template.taskgroups}" as="taskgroup">
 							<li>
-								<f:link.action action="show" controller="Template" arguments="{template: template}">{taskgroup.name}</f:link.action>
-								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
+								<f:link.action action="show" controller="Taskgroup" arguments="{taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
+								<f:link.action action="new" controller="Task" arguments="{taskgroup: taskgroup}" class="btn btn-mini btn-success">
 									Create Task
 								</f:link.action>
 							</li>
@@ -31,7 +31,7 @@
 			</f:if>
 			<p class="addTaskgroup">
 				<div id="showNewTaskGroupFields" class="btn btn-primary">Create a new Taskgroup</div>
-				<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup">
+				<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup" arguments="{template: template}">
 					<div class="newTaskgroupFields">
 						<f:form.textfield property="name" id="name" />
 						<f:form.submit class="btn btn-mini btn-success" value="Create" />
