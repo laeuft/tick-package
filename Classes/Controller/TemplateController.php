@@ -25,6 +25,18 @@ class TemplateController extends ActionController {
 	protected $templateRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TaskgroupRepository
+	 */
+	protected $taskgroupRepository;
+
+	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TaskRepository
+	 */
+	protected $taskRepository;
+
+	/**
 	 * Shows a list of templates
 	 *
 	 * @return void
@@ -41,6 +53,8 @@ class TemplateController extends ActionController {
 	 */
 	public function showAction(Template $template) {
 		$this->view->assign('template', $template);
+		$this->view->assign('taskgroups', $this->taskgroupRepository->findAll());
+		$this->view->assign('tasks', $this->taskRepository->findAll());
 	}
 
 	/**
