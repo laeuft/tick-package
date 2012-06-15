@@ -9,5 +9,59 @@
 			<td>{template.name}</td>
 		</tr>
 	</table>
+
+	<div class="row">
+		<div class="span6">
+			<f:if condition="{taskgroups}">
+				<f:then>
+					<ul>
+						<f:for each="{taskgroups}" as="taskgroup">
+							<li>
+								<f:link.action action="show" controller="Template" arguments="{template: template}">{taskgroup.name}</f:link.action>
+								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
+									Create Task
+								</f:link.action>
+							</li>
+						</f:for>
+					</ul>
+				</f:then>
+				<f:else>
+					<p>No taskgroups created yet.</p>
+				</f:else>
+			</f:if>
+			<p class="addTaskgroup">
+				<div id="showNewTaskGroupFields" class="btn btn-primary">Create a new Taskgroup</div>
+				<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup">
+					<div class="newTaskgroupFields">
+						<f:form.textfield property="name" id="name" />
+						<f:form.submit class="btn btn-mini btn-success" value="Create" />
+					</div>
+				</f:form>
+			</p>
+		</div>
+		<div class="span6">
+			<f:if condition="{tasks}">
+				<f:then>
+					<ul>
+						<f:for each="{tasks}" as="task">
+							<li>
+								<f:link.action action="show" controller="Task" arguments="{task: task}">{task.name}</f:link.action>
+							</li>
+						</f:for>
+					</ul>
+				</f:then>
+				<f:else>
+					<p>No tasks created yet. Create one by clicking the button next to the taskgroup.</p>
+				</f:else>
+			</f:if>
+		</div>
+	</div>
+
+
+
+
+
+
+
 	<f:link.action action="index" controller="Standard">Back</f:link.action>
 </f:section>
