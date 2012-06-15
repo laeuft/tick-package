@@ -12,7 +12,7 @@ use TYPO3\FLOW3\MVC\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Taskgroup;
 
 /**
- * Taskgroup controller for the Laeuft.Tick package 
+ * Taskgroup controller for the Laeuft.Tick package
  *
  * @FLOW3\Scope("singleton")
  */
@@ -23,6 +23,12 @@ class TaskgroupController extends ActionController {
 	 * @var \Laeuft\Tick\Domain\Repository\TaskgroupRepository
 	 */
 	protected $taskgroupRepository;
+
+	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TemplateRepository
+	 */
+	protected $templateRepository;
 
 	/**
 	 * Shows a list of taskgroups
@@ -58,9 +64,18 @@ class TaskgroupController extends ActionController {
 	 * @return void
 	 */
 	public function createAction(Taskgroup $newTaskgroup) {
+		// get the template which is given as argument
+		if($this->request->hasArgument('template')) {
+			$identifier = $this->request->getArgument('template');
+			$template = $this->templateRepository->findByIdentifier($identifier['__identity']);
+		}
+		// add the new taskgroup to the template
+		$template->addTaskgroup($newTaskgroup);
+		// add the new taskgroup
 		$this->taskgroupRepository->add($newTaskgroup);
 		$this->addFlashMessage('Created a new taskgroup.');
-		$this->redirect('index');
+		// go back to the template show form
+		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $identifier));
 	}
 
 	/**
