@@ -43,10 +43,12 @@ class TaskgroupController extends ActionController {
 	 * Shows a single taskgroup object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to show
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function showAction(Taskgroup $taskgroup) {
+	public function showAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		$this->view->assign('taskgroup', $taskgroup);
+		$this->view->assign('template', $template);
 	}
 
 	/**
@@ -63,19 +65,14 @@ class TaskgroupController extends ActionController {
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $newTaskgroup A new taskgroup to add
 	 * @return void
 	 */
-	public function createAction(Taskgroup $newTaskgroup) {
-		// get the template which is given as argument
-		if($this->request->hasArgument('template')) {
-			$identifier = $this->request->getArgument('template');
-			$template = $this->templateRepository->findByIdentifier($identifier['__identity']);
-		}
+	public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new taskgroup to the template
 		$template->addTaskgroup($newTaskgroup);
 		// add the new taskgroup
 		$this->taskgroupRepository->add($newTaskgroup);
 		$this->addFlashMessage('Created a new taskgroup.');
 		// go back to the template show form
-		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $identifier));
+		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
 	}
 
 	/**
