@@ -12,10 +12,10 @@
 					<ul>
 						<f:for each="{templates}" as="template">
 							<li>
-								<f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
+								<h5><f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
 								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
 									Start
-								</f:link.action>
+								</f:link.action></h5>
 							</li>
 						</f:for>
 					</ul>
