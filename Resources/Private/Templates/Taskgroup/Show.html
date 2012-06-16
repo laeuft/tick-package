@@ -28,7 +28,7 @@
 			</f:if>
 			<p class="addTask">
 				<div id="showNewTaskFields" class="btn btn-primary">Create a new Task</div>
-				<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{taskgroup: taskgroup}">
+				<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{template: template, taskgroup: taskgroup}">
 					<div class="newTaskFields">
 						<f:form.textfield property="name" id="name" />
 						<f:form.submit class="btn btn-mini btn-success" value="Create" />

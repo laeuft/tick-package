@@ -63,16 +63,17 @@ class TaskController extends ActionController {
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $newTask A new task to add
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
+	public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new task to the taskgrup
 		$taskgroup->addTask($newTask);
 		// add the new task
 		$this->taskRepository->add($newTask);
 		$this->addFlashMessage('Created a new task.');
 		// go back to the taskgroup show form
-		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('taskgroup' => $taskgroup));
+		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('template' => $template, 'taskgroup' => $taskgroup));
 	}
 
 	/**
