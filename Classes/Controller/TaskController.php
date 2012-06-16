@@ -43,9 +43,10 @@ class TaskController extends ActionController {
 	 * Shows a single task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to show
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
 	 * @return void
 	 */
-	public function showAction(Task $task) {
+	public function showAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
 		$this->view->assign('task', $task);
 	}
 
@@ -61,21 +62,17 @@ class TaskController extends ActionController {
 	 * Adds the given new task object to the task repository
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $newTask A new task to add
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
 	 * @return void
 	 */
-	public function createAction(Task $newTask) {
-		// get the taskgroup which is given as argument
-		if($this->request->hasArgument('taskgroup')) {
-			$identifier = $this->request->getArgument('taskgroup');
-			$taskgroup = $this->taskgroupRepository->findByIdentifier($identifier['__identity']);
-		}
+	public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
 		// add the new task to the taskgrup
 		$taskgroup->addTask($newTask);
 		// add the new task
 		$this->taskRepository->add($newTask);
 		$this->addFlashMessage('Created a new task.');
 		// go back to the taskgroup show form
-		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('taskgroup' => $identifier));
+		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('taskgroup' => $taskgroup));
 	}
 
 	/**
