@@ -12,10 +12,10 @@
 
 	<div class="row">
 		<div class="span6">
-			<f:if condition="{template.taskgroups}">
+			<f:if condition="{taskgroup.tasks}">
 				<f:then>
 					<ul>
-						<f:for each="{template.taskgroups}" as="taskgroup">
+						<f:for each="{taskgroup.tasks}" as="task">
 							<li>
 								<f:link.action action="show" controller="Task" arguments="{task: task}">{task.name}</f:link.action>
 							</li>
