@@ -9,5 +9,33 @@
 			<td>{taskgroup.name}</td>
 		</tr>
 	</table>
-	<f:link.action action="index">Back</f:link.action>
+
+	<div class="row">
+		<div class="span6">
+			<f:if condition="{template.taskgroups}">
+				<f:then>
+					<ul>
+						<f:for each="{template.taskgroups}" as="taskgroup">
+							<li>
+								<f:link.action action="show" controller="Task" arguments="{task: task}">{task.name}</f:link.action>
+							</li>
+						</f:for>
+					</ul>
+				</f:then>
+				<f:else>
+					<p>No tasks created yet.</p>
+				</f:else>
+			</f:if>
+			<p class="addTask">
+				<div id="showNewTaskFields" class="btn btn-primary">Create a new Task</div>
+				<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{taskgroup: taskgroup}">
+					<div class="newTaskFields">
+						<f:form.textfield property="name" id="name" />
+						<f:form.submit class="btn btn-mini btn-success" value="Create" />
+					</div>
+				</f:form>
+			</p>
+		</div>
+	</div>
+	<f:link.action action="show" controller="Template">Back</f:link.action>
 </f:section>
