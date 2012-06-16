@@ -63,6 +63,7 @@ class TaskgroupController extends ActionController {
 	 * Adds the given new taskgroup object to the taskgroup repository
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $newTaskgroup A new taskgroup to add
+	 * @param \Laeuft\Tick\Domain\Model\Template $tmeplate The template the taskgroup is related
 	 * @return void
 	 */
 	public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
