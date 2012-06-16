@@ -30,7 +30,12 @@
 				<div id="showNewTaskFields" class="btn btn-primary">Create a new Task</div>
 				<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{template: template, taskgroup: taskgroup}">
 					<div class="newTaskFields">
-						<f:form.textfield property="name" id="name" />
+						<div class="taskName">
+							Name: <f:form.textfield property="name" id="name" />
+						</div>
+						<div class="taskDescription">
+							Description : <f:form.textfield property="description" id="description" />
+						</div>
 						<f:form.submit class="btn btn-mini btn-success" value="Create" />
 					</div>
 				</f:form>
