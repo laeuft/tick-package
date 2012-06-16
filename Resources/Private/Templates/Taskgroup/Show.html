@@ -17,7 +17,7 @@
 					<ul>
 						<f:for each="{taskgroup.tasks}" as="task">
 							<li>
-								<f:link.action action="show" controller="Task" arguments="{task: task}">{task.name}</f:link.action>
+								<f:link.action action="show" controller="Task" arguments="{taskgroup: taskgroup, task: task}">{task.name}</f:link.action>
 							</li>
 						</f:for>
 					</ul>
@@ -37,5 +37,5 @@
 			</p>
 		</div>
 	</div>
-	<f:link.action action="show" controller="Template">Back</f:link.action>
+	<f:link.action action="show" controller="Template" arguments="{template: template}">Back</f:link.action>
 </f:section>

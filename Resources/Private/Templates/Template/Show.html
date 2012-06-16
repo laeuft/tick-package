@@ -17,7 +17,7 @@
 					<ul>
 						<f:for each="{template.taskgroups}" as="taskgroup">
 							<li>
-								<f:link.action action="show" controller="Taskgroup" arguments="{taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
+								<f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
 								<div id="showNewTaskFields" class="btn btn-mini btn-success">
 									Create Task
 								</div>
