@@ -18,9 +18,11 @@
 						<f:for each="{template.taskgroups}" as="taskgroup">
 							<li>
 								<f:link.action action="show" controller="Taskgroup" arguments="{taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
-								<f:link.action action="new" controller="Task" arguments="{taskgroup: taskgroup}" class="btn btn-mini btn-success">
+								<div id="showNewTaskFields" class="btn btn-mini btn-success">
 									Create Task
-								</f:link.action>
+								</div>
+								<div id="taskgroupIdentifier">
+								</div>
 							</li>
 						</f:for>
 					</ul>
@@ -39,29 +41,6 @@
 				</f:form>
 			</p>
 		</div>
-		<div class="span6">
-			<f:if condition="{tasks}">
-				<f:then>
-					<ul>
-						<f:for each="{tasks}" as="task">
-							<li>
-								<f:link.action action="show" controller="Task" arguments="{task: task}">{task.name}</f:link.action>
-							</li>
-						</f:for>
-					</ul>
-				</f:then>
-				<f:else>
-					<p>No tasks created yet. Create one by clicking the button next to the taskgroup.</p>
-				</f:else>
-			</f:if>
-		</div>
 	</div>
-
-
-
-
-
-
-
 	<f:link.action action="index" controller="Standard">Back</f:link.action>
 </f:section>
