@@ -5,4 +5,7 @@ jQuery(document).ready(function() {
 	jQuery('#showNewTaskGroupFields').click(function() {
 		jQuery(this).parent().find('#newTaskgroupForm').show("slow");
 	});
+	jQuery('#showNewTaskFields').click(function() {
+		jQuery(this).parent().parent().parent().parent().find('#newTaskForm').show("slow");
+	});
 });
