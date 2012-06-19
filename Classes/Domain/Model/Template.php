@@ -29,6 +29,13 @@ class Template {
 	 */
 	protected $taskgroups;
 
+	/**
+	 * The checklists
+	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Checklist>
+	 * @ORM\OneToMany(mappedBy="template",cascade="persist")
+	 */
+	protected $checklists;
+
 
 	public function __construct() {
 		$this->taskgroups = new \Doctrine\Common\Collections\ArrayCollection();
@@ -81,6 +88,35 @@ class Template {
 	public function addTaskgroup(\Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
 		$taskgroup->setTemplate($this);
 		$this->taskgroups->add($taskgroup);
+	}
+
+	/**
+	 * Get the Template's checklists
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Checklist The Template's checklists
+	 */
+	public function getChecklists() {
+		return $this->checklists;
+	}
+
+	/**
+	 * Sets this Template's checklists
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklists The Template's checklists
+	 * @return void
+	 */
+	public function setChecklists($checklists) {
+		$this->checklists = $checklists;
+	}
+
+	/**
+	 * Adds a Checklist to this template
+	 *
+	 * @param $Checklist
+	 */
+	public function addChecklist(\Laeuft\Tick\Domain\Model\Checklist $checklist) {
+		$checklist->setTemplate($this);
+		$this->checklists->add($checklist);
 	}
 
 }
