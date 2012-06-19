@@ -9,9 +9,10 @@
 		<ol>
 			<li>
 				<label for="name">Name</label>
-				<f:form.textfield property="name" id="name" />
+				<f:form.textfield property="projectId" id="projectId" />
+				<f:form.hidden property="template" id="template" value="{template}" />
 			</li>
-		
+
 			<li>
 				<f:form.submit value="Create" />
 			</li>
