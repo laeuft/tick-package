@@ -1,13 +1,34 @@
 <f:layout name="Default" />
 
-<f:section name="Title">Show checklist "{checklist.name}"</f:section>
+<f:section name="Title">Show checklist "{checklist.projectId}"</f:section>
 
 <f:section name="Content">
 	<table>
 		<tr>
 			<th>Name</th>
-			<td>{checklist.name}</td>
+			<td>{checklist.projectId}</td>
 		</tr>
 	</table>
-	<f:link.action action="index">Back</f:link.action>
+	<f:for each="{checklist.template.taskgroups}" as="taskgroup">
+		<table>
+			<f:if condition="{taskgroup.tasks}">
+				<tr>
+					<td colspan="2">
+						<b>{taskgroup.name}</b>
+					</td>
+				</tr>
+			</f:if>
+			<f:for each="{taskgroup.tasks}" as="task">
+				<tr>
+					<td>
+						<f:link.action action="create" controller="Tick" arguments="{checklist: checklist, template: checklist.template}">Tick</f:link.action>
+					</td>
+					<td>
+						{task.name} {task.description}
+					</td>
+				</tr>
+			</f:for>
+		</table>
+	</f:for>
+	<f:link.action action="index" controller="Standard">Back</f:link.action>
 </f:section>
