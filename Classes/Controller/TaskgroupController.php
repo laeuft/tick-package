@@ -69,6 +69,8 @@ class TaskgroupController extends ActionController {
 	public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new taskgroup to the template
 		$template->addTaskgroup($newTaskgroup);
+
+		$newTaskgroup->setSortOrder($this->taskgroupRepository->getNextSortOrder($template));
 		// add the new taskgroup
 		$this->taskgroupRepository->add($newTaskgroup);
 		$this->addFlashMessage('Created a new taskgroup.');

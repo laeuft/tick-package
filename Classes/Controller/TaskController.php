@@ -69,6 +69,8 @@ class TaskController extends ActionController {
 	public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new task to the taskgrup
 		$taskgroup->addTask($newTask);
+
+		$newTask->setSortOrder($this->taskRepository->getNextSortOrder($taskgroup));
 		// add the new task
 		$this->taskRepository->add($newTask);
 		$this->addFlashMessage('Created a new task.');
