@@ -93,12 +93,13 @@ class TickController extends ActionController {
 	 * Removes the given tick object from the tick repository
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Tick $tick The tick to delete
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist the tick has to be added
 	 * @return void
 	 */
-	public function deleteAction(Tick $tick) {
+	public function deleteAction(Tick $tick, \Laeuft\Tick\Domain\Model\Checklist $checklist) {
 		$this->tickRepository->remove($tick);
 		$this->addFlashMessage('Deleted a tick.');
-		$this->redirect('index');
+		$this->redirect('show', 'Checklist', 'Laeuft.Tick', array('checklist' => $checklist));
 	}
 
 }
