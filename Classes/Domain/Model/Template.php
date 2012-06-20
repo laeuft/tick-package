@@ -26,6 +26,7 @@ class Template {
 	 * The taskgroups
 	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Taskgroup>
 	 * @ORM\OneToMany(mappedBy="template",cascade="persist")
+	 * @ORM\OrderBy({"sortOrder" = "ASC"})
 	 */
 	protected $taskgroups;
 
