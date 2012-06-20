@@ -41,6 +41,13 @@ class Task {
 	 */
 	protected $sortOrder;
 
+	/**
+	 * The ticks
+	 * @var \Doctrine\Common\Collections\Collection<\Laeuft\Tick\Domain\Model\Tick>
+	 * @ORM\OneToMany(mappedBy="task",cascade="persist")
+	 */
+	protected $ticks;
+
 
 	/**
 	 * Get the Task's taskgroup
@@ -116,6 +123,35 @@ class Task {
 	 */
 	public function setSortOrder($sortOrder) {
 		$this->sortOrder = $sortOrder;
+	}
+
+	/**
+	 * Get the Task's ticks
+	 *
+	 * @return \Laeuft\Tick\Domain\Model\Tick $ticks The Task's ticks
+	 */
+	public function getTicks() {
+		return $this->ticks;
+	}
+
+	/**
+	 * Sets this Task's ticks
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Tick $ticks The Task's ticks
+	 * @return void
+	 */
+	public function setTicks($ticks) {
+		$this->ticks = $ticks;
+	}
+
+	/**
+	 * Adds an additional tick to this task
+	 *
+	 * @param \Laeuft\Tick\Domain\Model\Tick $tick the tick
+	 */
+	public function addTick(\Laeuft\Tick\Domain\Model\Tick $tick) {
+		$tick->setTick($this);
+		$this->ticks->add($tick);
 	}
 
 }

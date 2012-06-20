@@ -21,7 +21,13 @@
 			<f:for each="{taskgroup.tasks}" as="task">
 				<tr>
 					<td>
-						<f:link.action action="create" controller="Tick" arguments="{checklist: checklist, template: checklist.template}">Tick</f:link.action>
+						<f:form id="newTickForm" method="POST" action="create" object="{newTick}" controller="Tick" name="newTick" arguments="{checklist: checklist}">
+							<div class="newTick">
+								<f:form.submit class="btn btn-mini btn-success" value="Tick" />
+								<f:form.hidden property="task" value="{task}" />
+								<f:form.hidden property="checklist" value="{checklist}" />
+							</div>
+						</f:form>
 					</td>
 					<td>
 						{task.name} {task.description}

@@ -39,7 +39,7 @@ class Tick {
 	/**
 	 * The task
 	 * @var \Laeuft\Tick\Domain\Model\Task
-	 * @ORM\ManyToOne
+	 * @ORM\ManyToOne(inversedBy="ticks")
 	 */
 	protected $task;
 

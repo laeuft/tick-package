@@ -12,7 +12,7 @@ use TYPO3\FLOW3\MVC\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Tick;
 
 /**
- * Tick controller for the Laeuft.Tick package 
+ * Tick controller for the Laeuft.Tick package
  *
  * @FLOW3\Scope("singleton")
  */
@@ -55,12 +55,16 @@ class TickController extends ActionController {
 	 * Adds the given new tick object to the tick repository
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Tick $newTick A new tick to add
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist the tick has to be added
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the checklist is related
+	 *
 	 * @return void
 	 */
-	public function createAction(Tick $newTick) {
+	public function createAction(Tick $newTick, \Laeuft\Tick\Domain\Model\Checklist $checklist) {
+		$checklist->addTick($newTick);
 		$this->tickRepository->add($newTick);
 		$this->addFlashMessage('Created a new tick.');
-		$this->redirect('index');
+		$this->redirect('show', 'Checklist', 'Laeuft.Tick', array('checklist' => $checklist));
 	}
 
 	/**
