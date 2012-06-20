@@ -35,6 +35,12 @@ class Task {
 	 */
 	protected $description;
 
+	/**
+	 * The sort order
+	 * @var integer
+	 */
+	protected $sortOrder;
+
 
 	/**
 	 * Get the Task's taskgroup
@@ -91,6 +97,25 @@ class Task {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+
+	/**
+	 * Get the Task's sortOrder
+	 *
+	 * @return integer The Task's sortOrder
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
+
+	/**
+	 * Sets this Task's SortOrder
+	 *
+	 * @param integer $sortOrder The Task's sortOrder
+	 * @return void
+	 */
+	public function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 	}
 
 }

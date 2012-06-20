@@ -36,6 +36,12 @@ class Taskgroup {
 	 */
 	protected $tasks;
 
+	/**
+	 * The sort order
+	 * @var integer
+	 */
+	protected $sortOrder;
+
 
 	public function __construct() {
 		$this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
@@ -107,6 +113,25 @@ class Taskgroup {
 	public function addTask(\Laeuft\Tick\Domain\Model\Task $task) {
 		$task->setTaskgroup($this);
 		$this->tasks->add($task);
+	}
+
+	/**
+	 * Get the Taskgroup's sortOrder
+	 *
+	 * @return integer The Taskgroup's sortOrder
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
+
+	/**
+	 * Sets this Taskgroup's SortOrder
+	 *
+	 * @param integer $sortOrder The Taskgroup's sortOrder
+	 * @return integer
+	 */
+	public function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 	}
 
 }
