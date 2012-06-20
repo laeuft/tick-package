@@ -21,13 +21,22 @@
 			<f:for each="{taskgroup.tasks}" as="task">
 				<tr>
 					<td>
-						<f:form id="newTickForm" method="POST" action="create" object="{newTick}" controller="Tick" name="newTick" arguments="{checklist: checklist}">
-							<div class="newTick">
-								<f:form.submit class="btn btn-mini btn-success" value="Tick" />
-								<f:form.hidden property="task" value="{task}" />
-								<f:form.hidden property="checklist" value="{checklist}" />
-							</div>
-						</f:form>
+						<f:for each="{checklist.ticks}" as="tick">
+							<f:if condition="{tick.task} == {task}">
+								<f:then>
+									<f:link.action action="delete" controller="Tick" arguments="{tick: tick}">UNTICK</f:link.action>
+								</f:then>
+								<f:else>
+									<f:form id="newTickForm" method="POST" action="create" object="{newTick}" controller="Tick" name="newTick" arguments="{checklist: checklist}">
+										<div class="newTick">
+											<f:form.submit class="btn btn-mini btn-success" value="Tick" />
+											<f:form.hidden property="task" value="{task}" />
+											<f:form.hidden property="checklist" value="{checklist}" />
+										</div>
+									</f:form>
+								</f:else>
+							</f:if>
+						</f:for>
 					</td>
 					<td>
 						{task.name} {task.description}
