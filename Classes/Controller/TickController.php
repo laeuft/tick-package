@@ -25,6 +25,18 @@ class TickController extends ActionController {
 	protected $tickRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\ChecklistRepository
+	 */
+	protected $checklistRepository;
+
+	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TaskRepository
+	 */
+	protected $taskRepository;
+
+	/**
 	 * Shows a list of ticks
 	 *
 	 * @return void
@@ -54,13 +66,15 @@ class TickController extends ActionController {
 	/**
 	 * Adds the given new tick object to the tick repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Tick $newTick A new tick to add
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist the tick has to be added
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the checklist is related
+	 * @param \Laeuft\Tick\Domain\Model\Task $task
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 *
 	 * @return void
 	 */
-	public function createAction(Tick $newTick, \Laeuft\Tick\Domain\Model\Checklist $checklist) {
+	public function createAction(\Laeuft\Tick\Domain\Model\Task $task, \Laeuft\Tick\Domain\Model\Checklist $checklist) {
+		$newTick = new \Laeuft\Tick\Domain\Model\Tick();
+		$newTick->setTask($task);
+		$newTick->setChecklist($checklist);
 		$checklist->addTick($newTick);
 		$this->tickRepository->add($newTick);
 		$this->addFlashMessage('Created a new tick.');
