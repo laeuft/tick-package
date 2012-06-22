@@ -9,27 +9,33 @@
 			<td>{checklist.projectId}</td>
 		</tr>
 	</table>
-	<f:for each="{checklist.template.taskgroups}" as="taskgroup">
-		<table>
-			<f:if condition="{taskgroup.tasks}">
+	<f:if condition="{taskgroups}">
+		<f:for each="{taskgroups}" as="tasks" key="taskgroupName">
+			<table>
 				<tr>
 					<td colspan="2">
-						<b>{taskgroup.name}</b>
+						<b>{taskgroupName}</b>
 					</td>
 				</tr>
-			</f:if>
-			<f:for each="{taskgroup.tasks}" as="task">
-				<tr>
-					<td>
-						<f:link.action class="btn btn-mini btn-success" action="create" controller="Tick" arguments="{checklist: checklist, task: task}">Tick</f:link.action>
-
-					</td>
-					<td>
-						{task.name} {task.description}
-					</td>
-				</tr>
-			</f:for>
-		</table>
-	</f:for>
+				<f:for each="{tasks}" as="task">
+					<tr>
+						<td>
+							<f:if condition="{task.tick}">
+								<f:then>
+									<f:link.action class="btn btn-mini error" action="delete" controller="Tick" arguments="{checklist: checklist, tick: task.tick}">Untick</f:link.action>
+								</f:then>
+								<f:else>
+									<f:link.action class="btn btn-mini btn-success" action="create" controller="Tick" arguments="{checklist: checklist, task: task.task}">Tick</f:link.action>
+								</f:else>
+							</f:if>
+						</td>
+						<td>
+							{task.task.name} {task.task.description}
+						</td>
+					</tr>
+				</f:for>
+			</table>
+		</f:for>
+	</f:if>
 	<f:link.action action="index" controller="Standard">Back</f:link.action>
 </f:section>

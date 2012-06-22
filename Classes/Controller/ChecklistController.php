@@ -25,6 +25,12 @@ class ChecklistController extends ActionController {
 	protected $checklistRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TickRepository
+	 */
+	protected $tickRepository;
+
+	/**
 	 * Shows a list of checklists
 	 *
 	 * @return void
@@ -40,6 +46,25 @@ class ChecklistController extends ActionController {
 	 * @return void
 	 */
 	public function showAction(Checklist $checklist) {
+		$arrTaskgroups = array();
+		foreach($checklist->getTemplate()->getTaskgroups() as $taskgroup) {
+			$counter = 1;
+			foreach($taskgroup->getTasks() as $task) {
+				$arrTaskgroups[$taskgroup->getName()][$counter]['task'] = $task;
+				$arrTaskgroups[$taskgroup->getName()][$counter]['tick'] = $this->tickRepository->findOneByTask($task);
+				$counter++;
+			}
+		}
+
+/*foreach($arrTaskgroups as $taskgroupName => $tasks) {
+	echo $taskgroupName . '<br>';
+
+	foreach($tasks as $task) {
+
+	}
+}*/
+
+		$this->view->assign('taskgroups', $arrTaskgroups);
 		$this->view->assign('checklist', $checklist);
 	}
 
