@@ -38,5 +38,28 @@ class TaskRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		}
 	}
 
+	/**
+	* Return the task which will be shifted
+	*
+	* @param \Laeuft\Tick\Domain\Model\Task $task
+	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	* @param integer $shiftValue
+	*
+	* @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	*/
+	public function findToShift($taskgroup, $task, $shiftValue) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->logicalAnd(
+				array(
+					$query->equals('taskgroup', $taskgroup),
+					$query->equals('sortOrder', $task->getSortOrder() + $shiftValue)
+				)
+			)
+		);
+
+		return $query->execute();
+	}
+
 }
 ?>

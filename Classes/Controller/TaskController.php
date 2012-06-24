@@ -112,6 +112,37 @@ class TaskController extends ActionController {
 		$this->redirect('index');
 	}
 
+	/**
+	* Shift the selected task and change the sort order of all affected tasks
+	*
+	* @param \Laeuft\Tick\Domain\Model\Task $taskToShift
+	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
+	* @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	* @param integer $newValue
+	*/
+	public function shiftAction(Task $taskToShift, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
+		// get the task which is affected to be shifted
+		$task = $this->taskRepository->findToShift($taskgroup, $taskToShift, $newValue);
+
+		// add the new value to the searched task
+		$task->current()->setSortOrder($task->current()->getSortOrder() + ($newValue * -1));
+		$this->taskRepository->update($task->current());
+
+		// add the new value to the selected task
+		$taskToShift->setSortOrder($taskToShift->getSortOrder() + $newValue);
+		$this->taskRepository->update($taskToShift);
+
+		$this->redirect(
+			'show',
+			'Taskgroup',
+			'Laeuft.Tick',
+			array(
+				'taskgroup' => $taskgroup,
+				'template' => $template
+			)
+		);
+	}
+
 }
 
 ?>

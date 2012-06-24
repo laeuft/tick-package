@@ -15,9 +15,26 @@
 			<f:if condition="{taskgroup.tasks}">
 				<f:then>
 					<ul>
-						<f:for each="{taskgroup.tasks}" as="task">
+						<f:for each="{taskgroup.tasks}" as="task" iteration="iterator">
 							<li>
-								<h5>{task.name}</h5> <h6>{task.description}</h6>
+								<h5>
+									{task.name}
+									<f:if condition="{iterator.isFirst}">
+										<f:else>
+											<f:link.action action="shift" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, taskToShift: task, newValue: '-1'}">
+												<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
+											</f:link.action>
+										</f:else>
+									</f:if>
+
+									<f:if condition="{iterator.isLast}">
+										<f:else>
+											<f:link.action action="shift" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, taskToShift: task, newValue: '1'}">
+												<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
+											</f:link.action>
+										</f:else>
+									</f:if>
+								</h5> <h6>{task.description}</h6>
 							</li>
 						</f:for>
 					</ul>

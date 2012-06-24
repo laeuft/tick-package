@@ -38,7 +38,7 @@ class TaskgroupRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		}
 	}
 
-	/**+
+	/**
 	* Return the taskgroup which will be shifted
 	*
 	* @param \Laeuft\Tick\Domain\Model\Template $template
