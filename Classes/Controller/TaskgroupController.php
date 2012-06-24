@@ -112,6 +112,28 @@ class TaskgroupController extends ActionController {
 		$this->redirect('index');
 	}
 
+	/**
+	* Shift the selected taskgroup and change the sort order of all affected taskgroups
+	*
+	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroupToShift
+	* @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	* @param integer $newValue
+	*/
+	public function shiftAction(Taskgroup $taskgroupToShift, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
+		// get the taskgroup which is affected to be shifted
+		$taskgroup = $this->taskgroupRepository->findToShift($template, $taskgroupToShift, $newValue);
+
+		// add the new value to the searched taskgroup
+		$taskgroup->current()->setSortOrder($taskgroup->current()->getSortOrder() + ($newValue * -1));
+		$this->taskgroupRepository->update($taskgroup->current());
+
+		// add the new value to the selected taskgroup
+		$taskgroupToShift->setSortOrder($taskgroupToShift->getSortOrder() + $newValue);
+		$this->taskgroupRepository->update($taskgroupToShift);
+
+		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
+	}
+
 }
 
 ?>
