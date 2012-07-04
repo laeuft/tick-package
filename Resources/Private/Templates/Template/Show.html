@@ -18,6 +18,9 @@
 						<f:for each="{template.taskgroups}" as="taskgroup" iteration="iterator">
 							<li>
 								<h5><f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
+								<f:link.action action="edit" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}" class="btn btn-mini btn-info">
+									Edit
+								</f:link.action>
 								<f:if condition="{iterator.isFirst}">
 									<f:else>
 										<f:link.action action="shift" controller="Taskgroup" arguments="{template: template, taskgroupToShift: taskgroup, newValue: '-1'}">

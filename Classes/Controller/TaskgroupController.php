@@ -82,22 +82,25 @@ class TaskgroupController extends ActionController {
 	 * Shows a form for editing an existing taskgroup object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to edit
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function editAction(Taskgroup $taskgroup) {
+	public function editAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		$this->view->assign('taskgroup', $taskgroup);
+		$this->view->assign('template', $template);
 	}
 
 	/**
 	 * Updates the given taskgroup object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to update
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function updateAction(Taskgroup $taskgroup) {
+	public function updateAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		$this->taskgroupRepository->update($taskgroup);
 		$this->addFlashMessage('Updated the taskgroup.');
-		$this->redirect('index');
+		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
 	}
 
 	/**
