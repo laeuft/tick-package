@@ -94,7 +94,7 @@ class TemplateController extends ActionController {
 	public function updateAction(Template $template) {
 		$this->templateRepository->update($template);
 		$this->addFlashMessage('Updated the template.');
-		$this->redirect('index');
+		$this->redirect('index', 'Standard');
 	}
 
 	/**
