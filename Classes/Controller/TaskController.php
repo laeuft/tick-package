@@ -82,22 +82,28 @@ class TaskController extends ActionController {
 	 * Shows a form for editing an existing task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to edit
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function editAction(Task $task) {
+	public function editAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		$this->view->assign('task', $task);
+		$this->view->assign('taskgroup', $taskgroup);
+		$this->view->assign('template', $template);
 	}
 
 	/**
 	 * Updates the given task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to update
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function updateAction(Task $task) {
+	public function updateAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		$this->taskRepository->update($task);
 		$this->addFlashMessage('Updated the task.');
-		$this->redirect('index');
+		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('template' => $template, 'taskgroup' => $taskgroup));
 	}
 
 	/**
