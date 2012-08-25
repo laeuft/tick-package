@@ -12,36 +12,51 @@ jQuery(document).ready(function() {
 	});
 });
 
+/**************************************************************
+	Check if the create template button has been clicked.
+	Call ajax call to create the template. After template
+	successfully has been created, reload the template list.
+**************************************************************/
 jQuery('#createTemplate').live('click', function() {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/create';
 	var parameter = 'name=' + jQuery('#templateName').val();
 	ajaxRequest(path, parameter);
+
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/list';
+	reloadTemplateList(path, '');
 });
 
+/**************************************************************
+	AJAX-Call to create the template.
 
+	Return:
+	true	Return true if the request was successfull
+	false	Return false if the request was not successfull
+**************************************************************/
 function ajaxRequest(path, parameter) {
-	$.ajax({
+	jQuery.ajax({
 		url: path,
 		data: parameter,
+		async: false,
 		beforeSend: function() {
-			/* $('#process_loader').show();
-			$('#checkUrl_verifyAction').attr('disabled', 'disabled'); */
+
 		},
 		success: function(result) {
-			/* if (result) {
-				if (result == 'ok') {
-					$('#checkUrl_verifyAction').removeAttr('disabled');
-					$('#result').show();
-					$('#error').text('');
-					$('#error').hide();
-				} else {
-					$('#checkUrl_verifyAction').removeAttr('disabled');
-					$('#result').hide();
-					$('#error').show();
-					$('#error').text(result);
-				}
-				$('#process_loader').hide();
-			} */
+			return 1;
+		}
+	});
+}
+
+function reloadTemplateList(path, parameter) {
+	jQuery.ajax({
+		url: path,
+		data: parameter,
+		async: false,
+		beforeSend: function() {
+
+		},
+		success: function(result) {
+			jQuery('#templateList').replaceWith(result);
 		}
 	});
 }

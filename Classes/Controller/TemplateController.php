@@ -46,6 +46,15 @@ class TemplateController extends ActionController {
 	}
 
 	/**
+	* Renders a list of all templates
+	*
+	*/
+	public function listAction() {
+		$templates = $this->templateRepository->findAll();
+		$this->view->assign('templates', $templates);
+	}
+
+	/**
 	 * Shows a single template object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Template $template The template to show
