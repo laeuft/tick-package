@@ -66,14 +66,38 @@ class TemplateController extends ActionController {
 	/**
 	 * Adds the given new template object to the template repository
 	 *
+	 * @return void
+	 */
+	public function createAction() {
+		// Check if the template name is available as GET parameter
+		if($this->request->hasArgument('name')) {
+			// Get the template name
+			$name = $this->request->getArgument('name');
+
+			if($name != '') {
+				// Create a new template object
+				$template = new \Laeuft\Tick\Domain\Model\Template();
+
+				// add the name to the template
+				$template->setName($name);
+
+				// add the template to the repository
+				$this->templateRepository->add($template);
+			}
+		}
+	}
+
+	/**
+	 * Adds the given new template object to the template repository
+	 *
 	 * @param \Laeuft\Tick\Domain\Model\Template $newTemplate A new template to add
 	 * @return void
 	 */
-	public function createAction(Template $newTemplate) {
+	/* public function createAction(Template $newTemplate) {
 		$this->templateRepository->add($newTemplate);
 		$this->addFlashMessage('Created a new template.');
 		$this->redirect('index', 'Standard');
-	}
+	} */
 
 	/**
 	 * Shows a form for editing an existing template object
