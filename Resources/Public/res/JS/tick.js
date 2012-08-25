@@ -20,10 +20,7 @@ jQuery(document).ready(function() {
 jQuery('#createTemplate').live('click', function() {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/create';
 	var parameter = 'name=' + jQuery('#templateName').val();
-	ajaxRequest(path, parameter);
-
-	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/list';
-	reloadTemplateList(path, '');
+	ajaxRequestCreate(path, parameter, 'reloadTemplateList');
 });
 
 /**************************************************************
@@ -33,28 +30,28 @@ jQuery('#createTemplate').live('click', function() {
 	true	Return true if the request was successfull
 	false	Return false if the request was not successfull
 **************************************************************/
-function ajaxRequest(path, parameter) {
+function ajaxRequestCreate(path, parameter, functionInSuccess) {
 	jQuery.ajax({
+		type: 'POST',
 		url: path,
 		data: parameter,
-		async: false,
-		beforeSend: function() {
-
-		},
+		async: true,
 		success: function(result) {
-			return 1;
+			window[functionInSuccess]();
 		}
 	});
 }
 
-function reloadTemplateList(path, parameter) {
+/**************************************************************
+	AJAX-Call to get all templates and replace the current
+	list of templates with the complete one.
+**************************************************************/
+function reloadTemplateList() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/list';
 	jQuery.ajax({
+		type: 'POST',
 		url: path,
-		data: parameter,
-		async: false,
-		beforeSend: function() {
-
-		},
+		async: true,
 		success: function(result) {
 			jQuery('#templateList').replaceWith(result);
 		}
