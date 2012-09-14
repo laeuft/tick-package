@@ -8,7 +8,7 @@ namespace Laeuft\Tick\Controller;
 
 use TYPO3\FLOW3\Annotations as FLOW3;
 
-use TYPO3\FLOW3\MVC\Controller\ActionController;
+use TYPO3\FLOW3\Mvc\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Tick;
 
 /**

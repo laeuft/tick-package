@@ -14,7 +14,7 @@
 		<div class="span6">
 			<f:if condition="{template.taskgroups}">
 				<f:then>
-					<ul>
+					<ul id="taskgroupList">
 						<f:for each="{template.taskgroups}" as="taskgroup" iteration="iterator">
 							<li>
 								<h5><f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
@@ -42,7 +42,7 @@
 					</ul>
 				</f:then>
 				<f:else>
-					<p>No taskgroups created yet.</p>
+					<p id="taskgroupList">No taskgroups created yet.</p>
 				</f:else>
 			</f:if>
 			<p class="addTaskgroup">
@@ -50,7 +50,8 @@
 				<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup" arguments="{template: template}">
 					<div class="newTaskgroupFields">
 						<f:form.textfield property="name" id="name" />
-						<f:form.submit class="btn btn-mini btn-success" value="Create" />
+						<f:form.hidden id="template" property="template" value="{template}" />
+						<span id="createTaskgroup" class="btn btn-mini btn-success">Create</span>
 					</div>
 				</f:form>
 			</p>

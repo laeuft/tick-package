@@ -13,7 +13,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @FLOW3\Scope("singleton")
  */
-class TickCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {
+class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 
 	/**
 	 * @var array some random words

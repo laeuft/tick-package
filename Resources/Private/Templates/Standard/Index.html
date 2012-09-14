@@ -9,7 +9,7 @@
 		<div class="span6">
 			<f:if condition="{templates}">
 				<f:then>
-					<ul>
+					<ul id="templateList">
 						<f:for each="{templates}" as="template">
 							<li>
 								<h5><f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
@@ -24,7 +24,7 @@
 					</ul>
 				</f:then>
 				<f:else>
-					<p>No templates created yet.</p>
+					<p id="templateList">No templates created yet.</p>
 				</f:else>
 			</f:if>
 			<p class="addTemplate">

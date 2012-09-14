@@ -12,36 +12,79 @@ jQuery(document).ready(function() {
 	});
 });
 
+/**************************************************************
+	Check if the create template button has been clicked.
+	Call ajax call to create the template. After template
+	successfully has been created, reload the template list.
+**************************************************************/
 jQuery('#createTemplate').live('click', function() {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/create';
 	var parameter = 'name=' + jQuery('#templateName').val();
-	ajaxRequest(path, parameter);
+	ajaxRequestCreate(path, parameter, 'reloadTemplateList');
 });
 
+/**************************************************************
+	Check if the create taskgroup button has been clicked.
+	Call ajax call to create the taskgroup. After taskgroup
+	successfully has been created, reload the taskgroup list.
+**************************************************************/
+jQuery('#createTaskgroup').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/create';
+	var taskgroupName = jQuery('name').val();
+	var template = jQuery('template').val();
 
-function ajaxRequest(path, parameter) {
-	$.ajax({
+	var parameter = 'name=' + taskgroupName + '&templateId=' + template;
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList');
+});
+
+/**************************************************************
+	AJAX-Call to create the template.
+
+	Return:
+	true	Return true if the request was successfull
+	false	Return false if the request was not successfull
+**************************************************************/
+function ajaxRequestCreate(path, parameter, functionInSuccess) {
+	jQuery.ajax({
+		type: 'POST',
 		url: path,
 		data: parameter,
-		beforeSend: function() {
-			/* $('#process_loader').show();
-			$('#checkUrl_verifyAction').attr('disabled', 'disabled'); */
-		},
+		async: true,
 		success: function(result) {
-			/* if (result) {
-				if (result == 'ok') {
-					$('#checkUrl_verifyAction').removeAttr('disabled');
-					$('#result').show();
-					$('#error').text('');
-					$('#error').hide();
-				} else {
-					$('#checkUrl_verifyAction').removeAttr('disabled');
-					$('#result').hide();
-					$('#error').show();
-					$('#error').text(result);
-				}
-				$('#process_loader').hide();
-			} */
+			window[functionInSuccess]();
+		}
+	});
+}
+
+/**************************************************************
+	AJAX-Call to get all templates and replace the current
+	list of templates with the complete one.
+**************************************************************/
+function reloadTemplateList() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/list';
+	jQuery.ajax({
+		type: 'POST',
+		url: path,
+		async: true,
+		success: function(result) {
+			jQuery('#templateList').replaceWith(result);
+		}
+	});
+}
+
+/**************************************************************
+	AJAX-Call to get all templates and replace the current
+	list of templates with the complete one.
+**************************************************************/
+function reloadTaskgroupList() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/list';
+	jQuery.ajax({
+		type: 'POST',
+		url: path,
+		async: true,
+		success: function(result) {
+			jQuery('#taskgroupList').replaceWith(result);
 		}
 	});
 }

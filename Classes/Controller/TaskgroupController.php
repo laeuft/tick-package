@@ -8,7 +8,7 @@ namespace Laeuft\Tick\Controller;
 
 use TYPO3\FLOW3\Annotations as FLOW3;
 
-use TYPO3\FLOW3\MVC\Controller\ActionController;
+use TYPO3\FLOW3\Mvc\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Taskgroup;
 
 /**
@@ -62,11 +62,34 @@ class TaskgroupController extends ActionController {
 	/**
 	 * Adds the given new taskgroup object to the taskgroup repository
 	 *
+	 * @return void
+	 */
+	public function createAction() {
+		if($this->request->hasArgument('name') && $this->request->hasArgument('templateId')) {
+			$templateId = $this->request->getArgument('templateId');
+			$taskgroupName = $this->request->getArgument('name');
+
+			$template = $this->templateRepository->findByIdentifier($templateId);
+
+			$taskgroup = new \Laeuft\Tick\Domain\Model\Taskgroup();
+			$taskgroup->setName($taskgroupName);
+			$taskgroup->setTemplate($template);
+
+			$template->addTaskgroup($taskgroup);
+
+			$this->taskgroupRepository->add($taskgroup);
+			$this->templateRepository->update($template);
+		}
+	}
+
+	/**
+	 * Adds the given new taskgroup object to the taskgroup repository
+	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $newTaskgroup A new taskgroup to add
 	 * @param \Laeuft\Tick\Domain\Model\Template $tmeplate The template the taskgroup is related
 	 * @return void
 	 */
-	public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
+	/*public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new taskgroup to the template
 		$template->addTaskgroup($newTaskgroup);
 
@@ -76,7 +99,7 @@ class TaskgroupController extends ActionController {
 		$this->addFlashMessage('Created a new taskgroup.');
 		// go back to the template show form
 		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
-	}
+	}*/
 
 	/**
 	 * Shows a form for editing an existing taskgroup object

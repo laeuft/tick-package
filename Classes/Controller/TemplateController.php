@@ -8,7 +8,7 @@ namespace Laeuft\Tick\Controller;
 
 use TYPO3\FLOW3\Annotations as FLOW3;
 
-use TYPO3\FLOW3\MVC\Controller\ActionController;
+use TYPO3\FLOW3\Mvc\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\Template;
 
 /**
@@ -43,6 +43,15 @@ class TemplateController extends ActionController {
 	 */
 	public function indexAction() {
 		$this->view->assign('templates', $this->templateRepository->findAll());
+	}
+
+	/**
+	* Renders a list of all templates
+	*
+	*/
+	public function listAction() {
+		$templates = $this->templateRepository->findAll();
+		$this->view->assign('templates', $templates);
 	}
 
 	/**
@@ -83,8 +92,11 @@ class TemplateController extends ActionController {
 
 				// add the template to the repository
 				$this->templateRepository->add($template);
+
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**
