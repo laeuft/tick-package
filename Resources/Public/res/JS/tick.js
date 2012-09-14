@@ -30,8 +30,8 @@ jQuery('#createTemplate').live('click', function() {
 **************************************************************/
 jQuery('#createTaskgroup').live('click', function() {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/create';
-	var taskgroupName = jQuery('name').val();
-	var template = jQuery('template').val();
+	var taskgroupName = jQuery('#name').val();
+	var template = jQuery('#template').val();
 
 	var parameter = 'name=' + taskgroupName + '&templateId=' + template;
 

@@ -40,6 +40,15 @@ class TaskgroupController extends ActionController {
 	}
 
 	/**
+	* Renders a list of all taskgroups
+	*
+	*/
+	public function listAction() {
+		$taskgroups = $this->taskgroupRepository->findAll();
+		$this->view->assign('taskgroups', $taskgroups);
+	}
+
+	/**
 	 * Shows a single taskgroup object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to show

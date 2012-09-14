@@ -1,0 +1,26 @@
+<ul id="taskgroupList">
+	<f:for each="{taskgroups}" as="taskgroup" iteration="iterator">
+		<li>
+			<h5><f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
+			<f:link.action action="edit" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}" class="btn btn-mini btn-info">
+				Edit
+			</f:link.action>
+			<f:if condition="{iterator.isFirst}">
+				<f:else>
+					<f:link.action action="shift" controller="Taskgroup" arguments="{template: template, taskgroupToShift: taskgroup, newValue: '-1'}">
+						<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
+					</f:link.action>
+				</f:else>
+			</f:if>
+
+			<f:if condition="{iterator.isLast}">
+				<f:else>
+					<f:link.action action="shift" controller="Taskgroup" arguments="{template: template, taskgroupToShift: taskgroup, newValue: '1'}">
+						<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
+					</f:link.action>
+				</f:else>
+			</f:if>
+			</h5>
+		</li>
+	</f:for>
+</ul>
