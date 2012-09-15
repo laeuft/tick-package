@@ -40,6 +40,15 @@ class TaskController extends ActionController {
 	}
 
 	/**
+	* Renders a list of all tasks
+	*
+	*/
+	public function listAction() {
+		$tasks = $this->taskRepository->findAll();
+		$this->view->assign('tasks', $tasks);
+	}
+
+	/**
 	 * Shows a single task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to show
@@ -61,12 +70,35 @@ class TaskController extends ActionController {
 	/**
 	 * Adds the given new task object to the task repository
 	 *
+	 * @return void
+	 */
+	public function createAction() {
+		if($this->request->hasArgument('name') && $this->request->hasArgument('taskgroupId')) {
+			$taskgroupId = $this->request->getArgument('taskgroupId');
+			$taskName = $this->request->getArgument('name');
+
+			$taskgroup = $this->taskgroupRepository->findByIdentifier($taskgroupId);
+
+			$task = new \Laeuft\Tick\Domain\Model\Task();
+			$task->setName($taskName);
+			$task->setTaskgroup($taskgroup);
+
+			$taskgroup->addTask($task);
+
+			$this->taskRepository->add($task);
+			$this->taskgroupRepository->update($taskgroup);
+		}
+	}
+
+	/**
+	 * Adds the given new task object to the task repository
+	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $newTask A new task to add
 	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
 	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	 * @return void
 	 */
-	public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
+	/*public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
 		// add the new task to the taskgrup
 		$taskgroup->addTask($newTask);
 
@@ -76,7 +108,7 @@ class TaskController extends ActionController {
 		$this->addFlashMessage('Created a new task.');
 		// go back to the taskgroup show form
 		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('template' => $template, 'taskgroup' => $taskgroup));
-	}
+	}*/
 
 	/**
 	 * Shows a form for editing an existing task object

@@ -39,6 +39,22 @@ jQuery('#createTaskgroup').live('click', function() {
 });
 
 /**************************************************************
+	Check if the create task button has been clicked.
+	Call ajax call to create the task. After task
+	successfully has been created, reload the task list.
+**************************************************************/
+jQuery('#createTask').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Task/create';
+	var taskName = jQuery('#name').val();
+	var taskgroup = jQuery('#taskgroup').val();
+	var template = jQuery('#template').val();
+
+	var parameter = 'name=' + taskName + '&taskgroupId=' + taskgroup + '&templateId=' + template;
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskList');
+});
+
+/**************************************************************
 	AJAX-Call to create the template.
 
 	Return:
@@ -85,6 +101,22 @@ function reloadTaskgroupList() {
 		async: true,
 		success: function(result) {
 			jQuery('#taskgroupList').replaceWith(result);
+		}
+	});
+}
+
+/**************************************************************
+	AJAX-Call to get all tasks and replace the current
+	list of tasks with the complete one.
+**************************************************************/
+function reloadTaskList() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Task/list';
+	jQuery.ajax({
+		type: 'POST',
+		url: path,
+		async: true,
+		success: function(result) {
+			jQuery('#taskList').replaceWith(result);
 		}
 	});
 }
