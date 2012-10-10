@@ -52,7 +52,7 @@ class TaskController extends ActionController {
 	 * Shows a single task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to show
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
 	 * @return void
 	 */
 	public function showAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
@@ -91,31 +91,11 @@ class TaskController extends ActionController {
 	}
 
 	/**
-	 * Adds the given new task object to the task repository
-	 *
-	 * @param \Laeuft\Tick\Domain\Model\Task $newTask A new task to add
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
-	 * @return void
-	 */
-	/*public function createAction(Task $newTask, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
-		// add the new task to the taskgrup
-		$taskgroup->addTask($newTask);
-
-		$newTask->setSortOrder($this->taskRepository->getNextSortOrder($taskgroup));
-		// add the new task
-		$this->taskRepository->add($newTask);
-		$this->addFlashMessage('Created a new task.');
-		// go back to the taskgroup show form
-		$this->redirect('show', 'Taskgroup', 'Laeuft.Tick', array('template' => $template, 'taskgroup' => $taskgroup));
-	}*/
-
-	/**
 	 * Shows a form for editing an existing task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to edit
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The taskgrups template
 	 * @return void
 	 */
 	public function editAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -128,8 +108,8 @@ class TaskController extends ActionController {
 	 * Updates the given task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to update
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template The taskgroups template
 	 * @return void
 	 */
 	public function updateAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -154,8 +134,8 @@ class TaskController extends ActionController {
 	* Shift the selected task and change the sort order of all affected tasks
 	*
 	* @param \Laeuft\Tick\Domain\Model\Task $taskToShift
-	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup the task is related
-	* @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
+	* @param \Laeuft\Tick\Domain\Model\Template $template The taskgruops template
 	* @param integer $newValue
 	*/
 	public function shiftAction(Task $taskToShift, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
