@@ -44,6 +44,11 @@ class Taskgroup {
 	protected $sortOrder;
 
 
+	/**
+	* Initiates a new task to this taskgroup
+	*
+	* @return void
+	*/
 	public function __construct() {
 		$this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
 	}
@@ -110,6 +115,7 @@ class Taskgroup {
 	 * Adds an additional task to this taskgroup
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task the task
+	 * @return void
 	 */
 	public function addTask(\Laeuft\Tick\Domain\Model\Task $task) {
 		$task->setTaskgroup($this);
@@ -129,7 +135,7 @@ class Taskgroup {
 	 * Sets this Taskgroup's SortOrder
 	 *
 	 * @param integer $sortOrder The Taskgroup's sortOrder
-	 * @return integer
+	 * @return void
 	 */
 	public function setSortOrder($sortOrder) {
 		$this->sortOrder = $sortOrder;
