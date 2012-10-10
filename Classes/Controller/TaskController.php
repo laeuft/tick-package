@@ -53,10 +53,9 @@ class TaskController extends ActionController {
 	 * Shows a single task object
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to show
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
 	 * @return void
 	 */
-	public function showAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
+	public function showAction(Task $task) {
 		$this->view->assign('task', $task);
 	}
 
