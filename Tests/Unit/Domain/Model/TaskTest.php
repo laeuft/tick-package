@@ -20,7 +20,8 @@ class TaskTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
 		$this->markTestIncomplete('Automatically generated test case; you need to adjust this!');
 
 		$expected = 'Foo';
-		$actual = 'Foo'; // This should be the result of some function call
+		// This should be the result of some function call
+		$actual = 'Foo';
 		$this->assertSame($expected, $actual);
 	}
 }

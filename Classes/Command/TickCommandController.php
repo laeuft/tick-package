@@ -102,7 +102,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 		echo('Hello, I\'m James and I\'ll prepare some dummy data for you :-)' . PHP_EOL);
 
 		// create some templates
-		for ($i = 0; $i < rand(5,10); $i++) {
+		for ($i = 0; $i < rand(5, 10); $i++) {
 			$template = new \Laeuft\Tick\Domain\Model\Template();
 			$template->setName(
 				$this->generateRandomTemplateName()
@@ -110,8 +110,8 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 
 			// add some task groups and tasks on them
 			$numberOfTasks = 0;
-			for ($j = 0; $j < rand(5,14); $j++) {
-				$taskgroup = $this->createDummyTaskgroup(rand(4,10));
+			for ($j = 0; $j < rand(5, 14); $j++) {
+				$taskgroup = $this->createDummyTaskgroup(rand(4, 10));
 				$taskgroup->setName(
 					$this->generateRandomTaskgroupName()
 				);
@@ -168,7 +168,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 		while ($checklist->getTemplate()->getTaskgroups()->current()) {
 			  $taskgroup = $checklist->getTemplate()->getTaskgroups()->current();
 			  while ($taskgroup->getTasks()->current()) {
-				  if (rand(0,20) %6 == 0) {
+				  if (rand(0, 20) %6 == 0) {
 
 					  $task = $taskgroup->getTasks()->current();
 					  $tick = new \Laeuft\Tick\Domain\Model\Tick();
@@ -217,7 +217,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 		);
 
 		// on a certain chance, add an (optional) description
-		if (rand(0,20) % 4) {
+		if (rand(0, 20) % 4) {
 			$task->setDescription(
 				$this->generateRandomDescription()
 			);
@@ -232,7 +232,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 	 * @return string some foobar text of random length
 	 */
 	protected function generateRandomDescription() {
-		$description = substr($this->dummyText, 0, rand(30,255));
+		$description = substr($this->dummyText, 0, rand(30, 255));
 
 		return $description;
 	}
@@ -243,7 +243,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 	 * @return string a face project id
 	 */
 	protected function generateRandomProjectId() {
-		$id = rand(1111,9999) . '-' . rand(20,80) . '-0' . rand(1,9);
+		$id = rand(1111, 9999) . '-' . rand(20, 80) . '-0' . rand(1, 9);
 
 		return $id;
 	}
