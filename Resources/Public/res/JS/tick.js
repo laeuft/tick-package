@@ -20,6 +20,15 @@ jQuery(document).ready(function() {
 jQuery('#createTemplate').live('click', function() {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Template/create';
 	var parameter = 'name=' + jQuery('#templateName').val();
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
 	ajaxRequestCreate(path, parameter, 'reloadTemplateList');
 });
 
@@ -85,6 +94,10 @@ function reloadTemplateList() {
 		async: true,
 		success: function(result) {
 			jQuery('#templateList').replaceWith(result);
+
+			jQuery('#ajaxLoader').dialog('close');
+
+			jQuery('.newTemplateFields').hide();
 		}
 	});
 }
