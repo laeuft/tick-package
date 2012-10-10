@@ -13,6 +13,8 @@ class TaskgroupTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 *
+	 * @return void
 	 */
 	public function makeSureThatSomethingHolds() {
 		$this->markTestIncomplete('Automatically generated test case; you need to adjust this!');

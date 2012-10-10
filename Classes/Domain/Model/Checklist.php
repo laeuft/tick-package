@@ -44,6 +44,10 @@ class Checklist {
 	protected $ticks;
 
 
+	/**
+	* Initiates a new tick to this checklist
+	*
+	*/
 	public function __construct() {
 		$this->ticks = new \Doctrine\Common\Collections\ArrayCollection();
 	}
@@ -128,6 +132,7 @@ class Checklist {
 	 * Adds a single tick to this checklist
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Tick a tick
+	 * @return void
 	 */
 	public function addTick(\Laeuft\Tick\Domain\Model\Tick $tick) {
 		$tick->setChecklist($this);

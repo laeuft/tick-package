@@ -19,7 +19,7 @@ class TaskRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	* Get the next sort order according to the tasks in the current taskgroup
 	*
 	* @param \Laeuft\Tick\Domain\Model\Template $template
-	* @return mixed
+	* @return integer
 	*/
 	public function getNextSortOrder(\Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
 		// get all the taskgroups in the current template and sort them by sortOrder descending

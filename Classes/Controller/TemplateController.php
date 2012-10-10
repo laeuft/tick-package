@@ -48,6 +48,7 @@ class TemplateController extends ActionController {
 	/**
 	* Renders a list of all templates
 	*
+	* @return void
 	*/
 	public function listAction() {
 		$templates = $this->templateRepository->findAll();

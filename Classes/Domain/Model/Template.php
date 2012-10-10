@@ -38,6 +38,10 @@ class Template {
 	protected $checklists;
 
 
+	/**
+	* Initiates a new taskgroup to this template
+	*
+	*/
 	public function __construct() {
 		$this->taskgroups = new \Doctrine\Common\Collections\ArrayCollection();
 	}
@@ -85,6 +89,7 @@ class Template {
 	 * Adds a taskgroup to this template
 	 *
 	 * @param $taskgroup
+	 * @return void
 	 */
 	public function addTaskgroup(\Laeuft\Tick\Domain\Model\Taskgroup $taskgroup) {
 		$taskgroup->setTemplate($this);
@@ -114,6 +119,7 @@ class Template {
 	 * Adds a Checklist to this template
 	 *
 	 * @param $Checklist
+	 * @return void
 	 */
 	public function addChecklist(\Laeuft\Tick\Domain\Model\Checklist $checklist) {
 		$checklist->setTemplate($this);

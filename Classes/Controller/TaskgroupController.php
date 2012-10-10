@@ -42,6 +42,7 @@ class TaskgroupController extends ActionController {
 	/**
 	* Renders a list of all taskgroups
 	*
+	* @return void
 	*/
 	public function listAction() {
 		$taskgroups = $this->taskgroupRepository->findAll();
@@ -153,6 +154,8 @@ class TaskgroupController extends ActionController {
 	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroupToShift
 	* @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
 	* @param integer $newValue
+	*
+	* @return void
 	*/
 	public function shiftAction(Taskgroup $taskgroupToShift, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
 		// get the taskgroup which is affected to be shifted

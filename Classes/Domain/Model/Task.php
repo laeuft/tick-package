@@ -148,6 +148,7 @@ class Task {
 	 * Adds an additional tick to this task
 	 *
 	 * @param \Laeuft\Tick\Domain\Model\Tick $tick the tick
+	 * @return void
 	 */
 	public function addTick(\Laeuft\Tick\Domain\Model\Tick $tick) {
 		$tick->setTick($this);
