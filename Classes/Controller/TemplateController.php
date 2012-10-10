@@ -80,11 +80,11 @@ class TemplateController extends ActionController {
 	 */
 	public function createAction() {
 		// Check if the template name is available as GET parameter
-		if($this->request->hasArgument('name')) {
+		if ($this->request->hasArgument('name')) {
 			// Get the template name
 			$name = $this->request->getArgument('name');
 
-			if($name != '') {
+			if ($name != '') {
 				// Create a new template object
 				$template = new \Laeuft\Tick\Domain\Model\Template();
 

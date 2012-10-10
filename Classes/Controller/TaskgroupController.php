@@ -75,7 +75,7 @@ class TaskgroupController extends ActionController {
 	 * @return void
 	 */
 	public function createAction() {
-		if($this->request->hasArgument('name') && $this->request->hasArgument('templateId')) {
+		if ($this->request->hasArgument('name') && $this->request->hasArgument('templateId')) {
 			$templateId = $this->request->getArgument('templateId');
 			$taskgroupName = $this->request->getArgument('name');
 

@@ -47,9 +47,9 @@ class ChecklistController extends ActionController {
 	 */
 	public function showAction(Checklist $checklist) {
 		$arrTaskgroups = array();
-		foreach($checklist->getTemplate()->getTaskgroups() as $taskgroup) {
+		foreach ($checklist->getTemplate()->getTaskgroups() as $taskgroup) {
 			$counter = 1;
-			foreach($taskgroup->getTasks() as $task) {
+			foreach ($taskgroup->getTasks() as $task) {
 				$arrTaskgroups[$taskgroup->getName()][$counter]['task'] = $task;
 				$arrTaskgroups[$taskgroup->getName()][$counter]['tick'] = $this->tickRepository->findOneByTask($task);
 				$counter++;

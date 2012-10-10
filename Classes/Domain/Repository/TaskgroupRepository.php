@@ -29,7 +29,7 @@ class TaskgroupRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		$result = $query->execute();
 
 		// check if any results exist
-		if($result->getFirst()) {
+		if ($result->getFirst()) {
 			// return the current highest sort order + 1
 			return $result->getFirst()->getSortOrder() + 1;
 		} else {

@@ -167,7 +167,7 @@ class TickCommandController extends \TYPO3\FLOW3\Cli\CommandController {
 		// pick some of the tasks and create a tick on them
 		while ($checklist->getTemplate()->getTaskgroups()->current()) {
 			  $taskgroup = $checklist->getTemplate()->getTaskgroups()->current();
-			  while($taskgroup->getTasks()->current()) {
+			  while ($taskgroup->getTasks()->current()) {
 				  if (rand(0,20) %6 == 0) {
 
 					  $task = $taskgroup->getTasks()->current();
