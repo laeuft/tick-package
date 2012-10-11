@@ -73,15 +73,21 @@ class TaskController extends ActionController {
 	 * @return void
 	 */
 	public function createAction() {
-		if ($this->request->hasArgument('name') && $this->request->hasArgument('taskgroupId')) {
+		if ($this->request->hasArgument('name') &&
+			$this->request->hasArgument('taskgroupId') &&
+			$this->request->hasArgument('description')
+		) {
 			$taskgroupId = $this->request->getArgument('taskgroupId');
 			$taskName = $this->request->getArgument('name');
+			$description = $this->request->getArgument('description');
 
 			$taskgroup = $this->taskgroupRepository->findByIdentifier($taskgroupId);
 
 			$task = new \Laeuft\Tick\Domain\Model\Task();
 			$task->setName($taskName);
 			$task->setTaskgroup($taskgroup);
+			$task->setDescription($description);
+			$task->setSortOrder($this->taskRepository->getNextSortOrder($taskgroup));
 
 			$taskgroup->addTask($task);
 

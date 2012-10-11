@@ -65,8 +65,20 @@ jQuery('#createTask').live('click', function() {
 	var taskName = jQuery('#name').val();
 	var taskgroup = jQuery('#taskgroup').val();
 	var template = jQuery('#template').val();
+	var description = encodeURI(jQuery('#description').val());
 
-	var parameter = 'name=' + taskName + '&taskgroupId=' + taskgroup + '&templateId=' + template;
+	var parameter = 'name=' + taskName;
+	parameter += '&description=' + description;
+	parameter += '&taskgroupId=' + taskgroup;
+	parameter += '&templateId=' + template;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
 
 	ajaxRequestCreate(path, parameter, 'reloadTaskList');
 });
@@ -102,10 +114,11 @@ function reloadTemplateList() {
 		async: true,
 		success: function(result) {
 			jQuery('#templateList').replaceWith(result);
-
 			jQuery('#ajaxLoader').dialog('close');
 
-			jQuery('.newTemplateFields').hide();
+			jQuery('#templateName').val('')
+
+			jQuery('#newTemplateForm').hide();
 		}
 	});
 }
@@ -122,10 +135,11 @@ function reloadTaskgroupList() {
 		async: true,
 		success: function(result) {
 			jQuery('#taskgroupList').replaceWith(result);
-
 			jQuery('#ajaxLoader').dialog('close');
 
-			jQuery('.newTemplateFields').hide();
+			jQuery('#name').val();
+
+			jQuery('#newTaskgroupForm').hide();
 		}
 	});
 }
@@ -142,6 +156,11 @@ function reloadTaskList() {
 		async: true,
 		success: function(result) {
 			jQuery('#taskList').replaceWith(result);
+			jQuery('#ajaxLoader').dialog('close');
+
+			jQuery('#name').val('');
+			jQuery('#description').val('');
+			jQuery('#newTaskForm').hide();
 		}
 	});
 }
