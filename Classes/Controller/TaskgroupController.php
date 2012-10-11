@@ -75,7 +75,6 @@ class TaskgroupController extends ActionController {
 	 * @return void
 	 */
 	public function createAction() {
-DebugBreak('12346@127.0.0.1:10007');
 		if ($this->request->hasArgument('name') && $this->request->hasArgument('templateId')) {
 			$templateId = $this->request->getArgument('templateId');
 			$taskgroupName = $this->request->getArgument('name');
