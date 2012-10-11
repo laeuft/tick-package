@@ -75,6 +75,7 @@ class TaskgroupController extends ActionController {
 	 * @return void
 	 */
 	public function createAction() {
+DebugBreak('12346@127.0.0.1:10007');
 		if ($this->request->hasArgument('name') && $this->request->hasArgument('templateId')) {
 			$templateId = $this->request->getArgument('templateId');
 			$taskgroupName = $this->request->getArgument('name');
@@ -84,6 +85,7 @@ class TaskgroupController extends ActionController {
 			$taskgroup = new \Laeuft\Tick\Domain\Model\Taskgroup();
 			$taskgroup->setName($taskgroupName);
 			$taskgroup->setTemplate($template);
+			$taskgroup->setSortOrder($this->taskgroupRepository->getNextSortOrder($template));
 
 			$template->addTaskgroup($taskgroup);
 
