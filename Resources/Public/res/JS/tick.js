@@ -44,6 +44,14 @@ jQuery('#createTaskgroup').live('click', function() {
 
 	var parameter = 'name=' + taskgroupName + '&templateId=' + template;
 
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
 	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList');
 });
 
@@ -114,6 +122,10 @@ function reloadTaskgroupList() {
 		async: true,
 		success: function(result) {
 			jQuery('#taskgroupList').replaceWith(result);
+
+			jQuery('#ajaxLoader').dialog('close');
+
+			jQuery('.newTemplateFields').hide();
 		}
 	});
 }
