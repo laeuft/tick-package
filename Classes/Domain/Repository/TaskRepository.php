@@ -39,6 +39,28 @@ class TaskRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	}
 
 	/**
+	* Get all tasks of the given taskgroup ordered by the
+	* sortOrder.
+	*
+	* @param \Laeuft\Tick\Domain\Model\Taskgrup $taskgroup
+	*/
+	public function findByTaskgroup($taskgroup) {
+		$query = $this->createQuery();
+
+		$query->setOrderings(
+			array(
+				'sortOrder' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING
+			)
+		);
+		$query->matching(
+			$query->equals('taskgroup', $taskgroup)
+		);
+		$result = $query->execute();
+
+		return $result;
+	}
+
+	/**
 	* Return the task which will be shifted
 	*
 	* @param \Laeuft\Tick\Domain\Model\Task $task

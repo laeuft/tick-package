@@ -39,6 +39,28 @@ class TaskgroupRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	}
 
 	/**
+	* Get all taskgroups of the given template ordered by the
+	* sortOrder.
+	*
+	* @param $template
+	*/
+	public function findByTemplate($template) {
+		$query = $this->createQuery();
+
+		$query->setOrderings(
+			array(
+				'sortOrder' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING
+			)
+		);
+		$query->matching(
+			$query->equals('template', $template)
+		);
+		$result = $query->execute();
+
+		return $result;
+	}
+
+	/**
 	* Return the taskgroup which will be shifted
 	*
 	* @param \Laeuft\Tick\Domain\Model\Template $template
