@@ -37,7 +37,7 @@ class StandardController extends ActionController {
 	 * @return void
 	 */
 	public function indexAction() {
-		$this->view->assign('templates', $this->templateRepository->findAll());
+		$this->view->assign('templates', $this->templateRepository->findAllSortedName());
 		$this->view->assign('checklists', $this->checklistRepository->findAll());
 	}
 

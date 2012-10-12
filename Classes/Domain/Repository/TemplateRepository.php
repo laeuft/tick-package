@@ -32,5 +32,22 @@ class TemplateRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		return $template;
 	}
 
+	/**
+	* Returns all templates sorted by name descending
+	*
+	* @return $result
+	*/
+	public function findAllSortedName() {
+		$query = $this->createQuery();
+		$query->setOrderings(
+			array(
+				'name' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING
+			)
+		);
+		$result = $query->execute();
+
+		return $result;
+	}
+
 }
 ?>
