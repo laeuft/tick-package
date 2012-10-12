@@ -44,6 +44,8 @@ jQuery('#createTaskgroup').live('click', function() {
 
 	var parameter = 'name=' + taskgroupName + '&templateId=' + template;
 
+	var reloadParameter = 'templateId=' + template;
+
 	// open the modal with the previous appended data
 	jQuery('#ajaxLoader').dialog({
 		modal: true,
@@ -52,7 +54,7 @@ jQuery('#createTaskgroup').live('click', function() {
 
 	jQuery('.ui-dialog-titlebar-close').hide();
 
-	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList');
+	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList', reloadParameter);
 });
 
 /**************************************************************
@@ -72,6 +74,8 @@ jQuery('#createTask').live('click', function() {
 	parameter += '&taskgroupId=' + taskgroup;
 	parameter += '&templateId=' + template;
 
+	var reloadParameter = 'taskgroupId=' + taskgroup;
+
 	// open the modal with the previous appended data
 	jQuery('#ajaxLoader').dialog({
 		modal: true,
@@ -80,7 +84,7 @@ jQuery('#createTask').live('click', function() {
 
 	jQuery('.ui-dialog-titlebar-close').hide();
 
-	ajaxRequestCreate(path, parameter, 'reloadTaskList');
+	ajaxRequestCreate(path, parameter, 'reloadTaskList', reloadParameter);
 });
 
 /**************************************************************
@@ -90,14 +94,14 @@ jQuery('#createTask').live('click', function() {
 	true	Return true if the request was successfull
 	false	Return false if the request was not successfull
 **************************************************************/
-function ajaxRequestCreate(path, parameter, functionInSuccess) {
+function ajaxRequestCreate(path, parameter, functionInSuccess, reloadParameter) {
 	jQuery.ajax({
 		type: 'POST',
 		url: path,
 		data: parameter,
 		async: true,
 		success: function(result) {
-			window[functionInSuccess]();
+			window[functionInSuccess](reloadParameter);
 		}
 	});
 }
@@ -127,11 +131,12 @@ function reloadTemplateList() {
 	AJAX-Call to get all templates and replace the current
 	list of templates with the complete one.
 **************************************************************/
-function reloadTaskgroupList() {
+function reloadTaskgroupList(reloadParameter) {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/list';
 	jQuery.ajax({
 		type: 'POST',
 		url: path,
+		data: reloadParameter,
 		async: true,
 		success: function(result) {
 			jQuery('#taskgroupList').replaceWith(result);
@@ -148,11 +153,12 @@ function reloadTaskgroupList() {
 	AJAX-Call to get all tasks and replace the current
 	list of tasks with the complete one.
 **************************************************************/
-function reloadTaskList() {
+function reloadTaskList(reloadParameter) {
 	var path = jQuery('base').attr('href') + packageNameUrl + 'Task/list';
 	jQuery.ajax({
 		type: 'POST',
 		url: path,
+		data: reloadParameter,
 		async: true,
 		success: function(result) {
 			jQuery('#taskList').replaceWith(result);

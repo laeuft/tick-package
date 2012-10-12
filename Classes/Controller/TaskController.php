@@ -45,7 +45,14 @@ class TaskController extends ActionController {
 	* @return void
 	*/
 	public function listAction() {
-		$tasks = $this->taskRepository->findAll();
+		if ($this->request->hasArgument('taskgroupId')) {
+			$tasks = $this->taskRepository->findByTaskgroup(
+				$this->request->getArgument('taskgroupId')
+			);
+		} else {
+			$tasks = $this->taskRepository->findAll();
+		}
+
 		$this->view->assign('tasks', $tasks);
 	}
 

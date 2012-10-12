@@ -45,7 +45,14 @@ class TaskgroupController extends ActionController {
 	* @return void
 	*/
 	public function listAction() {
-		$taskgroups = $this->taskgroupRepository->findAll();
+		if ($this->request->hasArgument('templateId')) {
+			$taskgroups = $this->taskgroupRepository->findByTemplate(
+				$this->request->getArgument('templateId')
+			);
+		} else {
+			$taskgroups = $this->taskgroupRepository->findAll();
+		}
+
 		$this->view->assign('taskgroups', $taskgroups);
 	}
 
