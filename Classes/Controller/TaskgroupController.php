@@ -54,6 +54,7 @@ class TaskgroupController extends ActionController {
 		}
 
 		$this->view->assign('taskgroups', $taskgroups);
+		$this->view->assign('template', $this->request->getArgument('templateId'));
 	}
 
 	/**
@@ -159,25 +160,31 @@ class TaskgroupController extends ActionController {
 	/**
 	* Shift the selected taskgroup and change the sort order of all affected taskgroups
 	*
-	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroupToShift
-	* @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
-	* @param integer $newValue
-	*
 	* @return void
 	*/
-	public function shiftAction(Taskgroup $taskgroupToShift, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
-		// get the taskgroup which is affected to be shifted
-		$taskgroup = $this->taskgroupRepository->findToShift($template, $taskgroupToShift, $newValue);
+	public function shiftAction() {
+		if ($this->request->hasArgument('templateId') &&
+			$this->request->hasArgument('taskgroupId') &&
+			$this->request->hasArgument('shiftDirection')
+		) {
+			$taskgroupId = $this->request->getArgument('taskgroupId');
+			$templateId = $this->request->getArgument('templateId');
+			$shiftDirection = $this->request->getArgument('shiftDirection');
 
-		// add the new value to the searched taskgroup
-		$taskgroup->current()->setSortOrder($taskgroup->current()->getSortOrder() + ($newValue * -1));
-		$this->taskgroupRepository->update($taskgroup->current());
+			$template = $this->templateRepository->findByIdentifier($templateId);
+			$taskgroupToShift = $this->taskgroupRepository->findByIdentifier($taskgroupId);
 
-		// add the new value to the selected taskgroup
-		$taskgroupToShift->setSortOrder($taskgroupToShift->getSortOrder() + $newValue);
-		$this->taskgroupRepository->update($taskgroupToShift);
+			// get the taskgroup which is affected to be shifted
+			$taskgroup = $this->taskgroupRepository->findToShift($template, $taskgroupToShift, $shiftDirection);
 
-		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
+			// add the new value to the searched taskgroup
+			$taskgroup->current()->setSortOrder($taskgroup->current()->getSortOrder() + ($shiftDirection * -1));
+			$this->taskgroupRepository->update($taskgroup->current());
+
+			// add the new value to the selected taskgroup
+			$taskgroupToShift->setSortOrder($taskgroupToShift->getSortOrder() + $shiftDirection);
+			$this->taskgroupRepository->update($taskgroupToShift);
+		}
 	}
 
 }

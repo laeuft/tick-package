@@ -170,3 +170,57 @@ function reloadTaskList(reloadParameter) {
 		}
 	});
 }
+
+/**************************************************************
+	Check if the shift up icon has clicked on the taskgroup
+	list. Shift the clicked taskgroup up and reload the
+	taskgroup list.
+**************************************************************/
+jQuery('.shiftUpTaskgroup').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/shift';
+	var taskgroup = jQuery(this).parent().parent().parent().find('.taskgroup').val();
+	var template = jQuery(this).parent().parent().parent().find('.template').val();
+
+	var parameter = 'taskgroupId=' + taskgroup;
+	parameter += '&templateId=' + template;
+	parameter += '&shiftDirection=' + -1;
+
+	var reloadParameter = 'templateId=' + template;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList', reloadParameter);
+});
+
+/**************************************************************
+	Check if the shift down icon has clicked on the taskgroup
+	list. Shift the clicked taskgroup down and reload the
+	taskgroup list.
+**************************************************************/
+jQuery('.shiftDownTaskgroup').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Taskgroup/shift';
+	var taskgroup = jQuery(this).parent().parent().parent().find('.taskgroup').val();
+	var template = jQuery(this).parent().parent().parent().find('.template').val();
+
+	var parameter = 'taskgroupId=' + taskgroup;
+	parameter += '&templateId=' + template;
+	parameter += '&shiftDirection=' + 1;
+
+	var reloadParameter = 'templateId=' + template;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList', reloadParameter);
+});
