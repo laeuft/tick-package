@@ -12,55 +12,70 @@
 
 	<div class="row">
 		<div class="span6">
-			<f:if condition="{template.taskgroups}">
-				<f:then>
-					<ul id="taskgroupList">
+			<div class="row" id="taskgroupList">
+				<f:if condition="{template.taskgroups}">
+					<f:then>
 						<f:for each="{template.taskgroups}" as="taskgroup" iteration="iterator">
-							<li>
-								<f:form class="hiddenFields" method="POST" name="shiftUpForm">
-									<f:form.hidden class="template" property="template" value="{template}" />
-									<f:form.hidden class="taskgroup" property="taskgroup" value="{taskgroup}" />
-								</f:form>
-								<h5><f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">{taskgroup.name}</f:link.action>
-								<f:link.action action="edit" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}" class="btn btn-mini btn-info">
-									Edit
-								</f:link.action>
-								<span class="shiftIcons">
-									<f:if condition="{iterator.isFirst}">
-										<f:else>
-											<span class="shiftUpTaskgroup">
-												<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
-											</span>
-										</f:else>
-									</f:if>
+							<f:form class="hiddenFields" method="POST" name="shiftUpForm">
+								<f:form.hidden class="template" property="template" value="{template}" />
+							<f:form.hidden class="taskgroup" property="taskgroup" value="{taskgroup}" />
+							</f:form>
+							<h5>
+								<div class="span3">
+									<f:link.action action="show" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}">
+										{taskgroup.name}
+									</f:link.action>
+								</div>
+								<div class="span1">
+									<f:link.action action="edit" controller="Taskgroup" arguments="{template: template, taskgroup: taskgroup}" class="btn btn-mini btn-info">
+										Edit
+									</f:link.action>
+								</div>
+								<div class="span2">
+									<span class="shiftIcons">
+										<f:if condition="{iterator.isFirst}">
+											<f:else>
+												<span class="shiftUpTaskgroup">
+													<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
+												</span>
+											</f:else>
+										</f:if>
 
-									<f:if condition="{iterator.isLast}">
-										<f:else>
-											<span class="shiftDownTaskgroup">
-												<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
-											</span>
-										</f:else>
-									</f:if>
-								</span>
-								</h5>
-							</li>
+										<f:if condition="{iterator.isLast}">
+											<f:else>
+												<span class="shiftDownTaskgroup">
+													<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
+												</span>
+											</f:else>
+										</f:if>
+									</span>
+								</div>
+							</h5>
 						</f:for>
-					</ul>
-				</f:then>
-				<f:else>
-					<p id="taskgroupList">No taskgroups created yet.</p>
-				</f:else>
-			</f:if>
-			<p class="addTaskgroup">
-				<div id="showNewTaskGroupFields" class="btn btn-primary">Create a new Taskgroup</div>
-				<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup" arguments="{template: template}">
-					<div class="newTaskgroupFields">
-						<f:form.textfield property="name" id="name" />
-						<f:form.hidden id="template" property="template" value="{template}" />
-						<span id="createTaskgroup" class="btn btn-mini btn-success">Create</span>
-					</div>
-				</f:form>
-			</p>
+					</f:then>
+					<f:else>
+						<div class="span6">
+							<p id="taskgroupList">No taskgroups created yet.</p>
+						</div>
+					</f:else>
+				</f:if>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<p class="addTaskgroup">
+						<div id="showNewTaskGroupFields" class="btn btn-primary">
+							Create a new Taskgroup
+						</div>
+						<f:form id="newTaskgroupForm" method="POST" action="create" object="{newTaskgroup}" controller="Taskgroup" name="newTaskgroup" arguments="{template: template}">
+							<div class="newTaskgroupFields">
+								<f:form.textfield property="name" id="name" />
+								<f:form.hidden id="template" property="template" value="{template}" />
+								<span id="createTaskgroup" class="btn btn-mini btn-success">Create</span>
+							</div>
+						</f:form>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<f:link.action action="index" controller="Standard">Back</f:link.action>
