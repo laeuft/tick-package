@@ -224,3 +224,57 @@ jQuery('.shiftDownTaskgroup').live('click', function() {
 
 	ajaxRequestCreate(path, parameter, 'reloadTaskgroupList', reloadParameter);
 });
+
+/**************************************************************
+	Check if the shift up icon has clicked on the task
+	list. Shift the clicked task up and reload the
+	taskgroup list.
+**************************************************************/
+jQuery('.shiftUpTask').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Task/shift';
+	var task = jQuery(this).parent().parent().parent().find('.task').val();
+	var taskgroup = jQuery(this).parent().parent().parent().find('.taskgroup').val();
+
+	var parameter = 'taskId=' + task;
+	parameter += '&taskgroupId=' + taskgroup;
+	parameter += '&shiftDirection=' + -1;
+
+	var reloadParameter = 'taskgroupId=' + taskgroup;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskList', reloadParameter);
+});
+
+/**************************************************************
+	Check if the shift down icon has clicked on the task
+	list. Shift the clicked task down and reload the
+	taskgroup list.
+**************************************************************/
+jQuery('.shiftDownTask').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Task/shift';
+	var task = jQuery(this).parent().parent().parent().find('.task').val();
+	var taskgroup = jQuery(this).parent().parent().parent().find('.taskgroup').val();
+
+	var parameter = 'taskId=' + task;
+	parameter += '&taskgroupId=' + taskgroup;
+	parameter += '&shiftDirection=' + 1;
+
+	var reloadParameter = 'taskgroupId=' + taskgroup;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
+	ajaxRequestCreate(path, parameter, 'reloadTaskList', reloadParameter);
+});

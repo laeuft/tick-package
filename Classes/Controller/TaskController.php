@@ -54,6 +54,7 @@ class TaskController extends ActionController {
 		}
 
 		$this->view->assign('tasks', $tasks);
+		$this->view->assign('taskgroup', $this->request->getArgument('taskgroupId'));
 	}
 
 	/**
@@ -153,27 +154,35 @@ class TaskController extends ActionController {
 	*
 	* @return void
 	*/
-	public function shiftAction(Task $taskToShift, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template, $newValue) {
-		// get the task which is affected to be shifted
-		$task = $this->taskRepository->findToShift($taskgroup, $taskToShift, $newValue);
+	public function shiftAction() {
+		if ($this->request->hasArgument('taskId') &&
+			$this->request->hasArgument('taskgroupId') &&
+			$this->request->hasArgument('shiftDirection')
+		) {
+			$taskId = $this->request->getArgument('taskId');
+			$taskgroupId = $this->request->getArgument('taskgroupId');
+			$shiftDirection = $this->request->getArgument('shiftDirection');
 
-		// add the new value to the searched task
-		$task->current()->setSortOrder($task->current()->getSortOrder() + ($newValue * -1));
-		$this->taskRepository->update($task->current());
+			$taskToShift = $this->taskRepository->findByIdentifier($taskId);
+			$taskgroup = $this->taskgroupRepository->findByIdentifier($taskgroupId);
 
-		// add the new value to the selected task
-		$taskToShift->setSortOrder($taskToShift->getSortOrder() + $newValue);
-		$this->taskRepository->update($taskToShift);
+			// get the task which is affected to be shifted
+			$task = $this->taskRepository->findToShift(
+				$taskgroup,
+				$taskToShift,
+				$shiftDirection
+			);
 
-		$this->redirect(
-			'show',
-			'Taskgroup',
-			'Laeuft.Tick',
-			array(
-				'taskgroup' => $taskgroup,
-				'template' => $template
-			)
-		);
+			// add the new value to the searched task
+			$task->current()->setSortOrder(
+				$task->current()->getSortOrder() + ($shiftDirection * -1)
+			);
+			$this->taskRepository->update($task->current());
+
+			// add the new value to the selected task
+			$taskToShift->setSortOrder($taskToShift->getSortOrder() + $shiftDirection);
+			$this->taskRepository->update($taskToShift);
+		}
 	}
 
 }
