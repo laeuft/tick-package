@@ -7,35 +7,45 @@
 <f:section name="Content">
 	<div class="row">
 		<div class="span6">
+			<div class="row">
 			<f:if condition="{templates}">
 				<f:then>
-					<ul id="templateList">
-						<f:for each="{templates}" as="template">
-							<li>
-								<h5><f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
+					<f:for each="{templates}" as="template">
+						<h5>
+							<div class="span3">
+								<f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
+							</div>
+							<div class="span3">
 								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
 									Start
 								</f:link.action>
 								<f:link.action action="edit" controller="Template" arguments="{template: template}" class="btn btn-mini btn-info">
 									Edit
-								</f:link.action></h5>
-							</li>
-						</f:for>
-					</ul>
+								</f:link.action>
+							</div>
+						</h5>
+					</f:for>
 				</f:then>
 				<f:else>
-					<p id="templateList">No templates created yet.</p>
+					<div class="span16">
+						<p id="templateList">No templates created yet.</p>
+					</div>
 				</f:else>
 			</f:if>
-			<p class="addTemplate">
-				<div id="showNewTemplateFields" class="btn btn-primary">Create a new template</div>
-				<f:form id="newTemplateForm" method="POST" action="create" object="{newTemplate}" controller="Template" name="newTemplate">
-					<div class="newTemplateFields">
-						<f:form.textfield property="name" id="templateName" />
-						<span id="createTemplate" class="btn btn-mini btn-success">Create</span>
-					</div>
-				</f:form>
-			</p>
+			</div>
+			<div class="row">
+				<div class="span16">
+					<p class="addTemplate">
+						<div id="showNewTemplateFields" class="btn btn-primary">Create a new template</div>
+						<f:form id="newTemplateForm" method="POST" action="create" object="{newTemplate}" controller="Template" name="newTemplate">
+							<div class="newTemplateFields">
+								<f:form.textfield property="name" id="templateName" />
+								<span id="createTemplate" class="btn btn-mini btn-success">Create</span>
+							</div>
+						</f:form>
+					</p>
+				</div>
+			</div>
 		</div>
 		<div class="span6">
 			<f:if condition="{checklists}">
