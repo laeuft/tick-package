@@ -1,0 +1,18 @@
+<f:if condition="{checklists}">
+	<f:then>
+		<div id="checklistList">
+			<f:for each="{checklists}" as="checklist">
+				<div class="checklistEntry">
+					<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">
+						{checklist.projectId} - {checklist.template.name}
+					</f:link.action>
+				</div>
+			</f:for>
+		</div>
+	</f:then>
+	<f:else>
+		<div id="checklistList">
+			<p>No checklists started yet. Start one by clicking the button next to the template.</p>
+		</div>
+	</f:else>
+</f:if>

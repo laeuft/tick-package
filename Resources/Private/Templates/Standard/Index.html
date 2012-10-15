@@ -11,19 +11,26 @@
 			<f:if condition="{templates}">
 				<f:then>
 					<f:for each="{templates}" as="template">
-						<h5>
-							<div class="span3">
-								<f:link.action action="show" controller="Template" arguments="{template: template}">{template.name}</f:link.action>
-							</div>
-							<div class="span3">
-								<f:link.action action="new" controller="Checklist" arguments="{template: template}" class="btn btn-mini btn-success">
-									Start
-								</f:link.action>
-								<f:link.action action="edit" controller="Template" arguments="{template: template}" class="btn btn-mini btn-info">
-									Edit
-								</f:link.action>
-							</div>
-						</h5>
+						<div class="templateEntry">
+							<f:form class="hiddenFields" method="POST" name="hiddenFields">
+								<f:form.hidden class="template" property="template" value="{template}" />
+							</f:form>
+							<h5>
+								<div class="span3">
+									<f:link.action action="show" controller="Template" arguments="{template: template}">
+										{template.name}
+									</f:link.action>
+								</div>
+								<div class="span3">
+									<span class="btn btn-mini btn-success showNewChecklistFields">
+										Start
+									</span>
+									<f:link.action action="edit" controller="Template" arguments="{template: template}" class="btn btn-mini btn-info">
+										Edit
+									</f:link.action>
+								</div>
+							</h5>
+						</div>
 					</f:for>
 				</f:then>
 				<f:else>
@@ -46,20 +53,37 @@
 					</p>
 				</div>
 			</div>
+			<div class="row">
+				<div class="span16">
+					<p class="addChecklist">
+						<f:form id="newChecklistForm" method="POST" action="create" object="{newChecklist}" controller="Checklist" name="newChecklist">
+							<div class="newChecklistFields">
+								<f:form.textfield property="name" id="projectId" />
+								<span id="createChecklist" class="btn btn-mini btn-success">Create</span>
+								<f:form.hidden id="templateForChecklist" property="template" value="{template}" />
+							</div>
+						</f:form>
+					</p>
+				</div>
+			</div>
 		</div>
 		<div class="span6">
 			<f:if condition="{checklists}">
 				<f:then>
-					<ul>
+					<div id="checklistList">
 						<f:for each="{checklists}" as="checklist">
-							<li>
-								<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">{checklist.projectId} - {checklist.template.name}</f:link.action>
-							</li>
+							<div class="checklistEntry">
+								<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">
+									{checklist.projectId} - {checklist.template.name}
+								</f:link.action>
+							</div>
 						</f:for>
-					</ul>
+					</div>
 				</f:then>
 				<f:else>
-					<p>No checklists started yet. Start one by clicking the button next to the template.</p>
+					<div id="checklistList">
+						<p>No checklists started yet. Start one by clicking the button next to the template.</p>
+					</div>
 				</f:else>
 			</f:if>
 		</div>

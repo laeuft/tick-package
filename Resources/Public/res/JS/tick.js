@@ -2,13 +2,24 @@ var packageNameUrl = 'index.php/laeuft.tick/';
 
 jQuery(document).ready(function() {
 	jQuery('#showNewTemplateFields').click(function() {
-		jQuery(this).parent().find('#newTemplateForm').toggle("slow");
+		jQuery(this).parent().find('#newTemplateForm').toggle('slow');
 	});
 	jQuery('#showNewTaskGroupFields').click(function() {
-		jQuery(this).parent().find('#newTaskgroupForm').toggle("slow");
+		jQuery(this).parent().find('#newTaskgroupForm').toggle('slow');
 	});
 	jQuery('#showNewTaskFields').click(function() {
-		jQuery(this).parent().parent().parent().parent().find('#newTaskForm').toggle("slow");
+		jQuery(this).parent().parent().parent().parent().find('#newTaskForm').toggle('slow');
+	});
+	jQuery('.showNewChecklistFields').click(function() {
+		jQuery(this).parent().parent().parent().parent().parent().find('#newChecklistForm').toggle('slow');
+
+		if (jQuery(this).parent().parent().parent().parent().parent().find('#templateForChecklist').val() == '') {
+			jQuery(this).parent().parent().parent().parent().parent().find('#templateForChecklist').val(
+				jQuery(this).parent().parent().parent().find('.template').val()
+			);
+		} else {
+			jQuery(this).parent().parent().parent().parent().parent().find('#templateForChecklist').val('');
+		}
 	});
 });
 
@@ -30,6 +41,32 @@ jQuery('#createTemplate').live('click', function() {
 	jQuery('.ui-dialog-titlebar-close').hide();
 
 	ajaxRequestCreate(path, parameter, 'reloadTemplateList');
+});
+
+/**************************************************************
+	Check if the create checklist button has been clicked.
+	Call ajax call to create the checklist. After checklist
+	successfully has been created, reload the checklist list.
+**************************************************************/
+jQuery('#createChecklist').live('click', function() {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Checklist/create';
+	var projectId = jQuery('#projectId').val();
+	var template = jQuery('#templateForChecklist').val();
+
+	var parameter = 'projectId=' + projectId;
+	parameter += '&template=' + template;
+
+	var reloadParameter = 'templateId=' + template;
+
+	// open the modal with the previous appended data
+	jQuery('#ajaxLoader').dialog({
+		modal: true,
+		draggable: false
+	});
+
+	jQuery('.ui-dialog-titlebar-close').hide();
+
+	ajaxRequestCreate(path, parameter, 'reloadChecklistList', reloadParameter);
 });
 
 /**************************************************************
@@ -123,6 +160,28 @@ function reloadTemplateList() {
 			jQuery('#templateName').val('')
 
 			jQuery('#newTemplateForm').hide();
+		}
+	});
+}
+
+/**************************************************************
+	AJAX-Call to get all checklists of a template and replace
+	the current	list of checklists with the complete one.
+**************************************************************/
+function reloadChecklistList(reloadParameter) {
+	var path = jQuery('base').attr('href') + packageNameUrl + 'Checklist/list';
+	jQuery.ajax({
+		type: 'POST',
+		url: path,
+		data: reloadParameter,
+		async: true,
+		success: function(result) {
+			jQuery('#checklistList').replaceWith(result);
+			jQuery('#ajaxLoader').dialog('close');
+
+			jQuery('#projectId').val('')
+
+			jQuery('#newChecklistForm').hide();
 		}
 	});
 }

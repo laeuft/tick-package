@@ -31,12 +31,35 @@ class ChecklistController extends ActionController {
 	protected $tickRepository;
 
 	/**
+	 * @FLOW3\Inject
+	 * @var \Laeuft\Tick\Domain\Repository\TemplateRepository
+	 */
+	protected $templateRepository;
+
+	/**
 	 * Shows a list of checklists
 	 *
 	 * @return void
 	 */
 	public function indexAction() {
 		$this->view->assign('checklists', $this->checklistRepository->findAll());
+	}
+
+	/**
+	* Renders a list of all checklists to a template
+	*
+	* @return void
+	*/
+	public function listAction() {
+		if ($this->request->hasArgument('templateId')) {
+			$checklists = $this->checklistRepository->findByTemplate(
+				$this->request->getArgument('templateId')
+			);
+		} else {
+			$checklists = $this->checklistRepository->findAll();
+		}
+
+		$this->view->assign('checklists', $checklists);
 	}
 
 	/**
@@ -72,15 +95,24 @@ class ChecklistController extends ActionController {
 	/**
 	 * Adds the given new checklist object to the checklist repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $newChecklist
-	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
-	public function createAction(Checklist $newChecklist) {
-		$newChecklist->getTemplate()->addChecklist($newChecklist);
-		$this->checklistRepository->add($newChecklist);
-		$this->addFlashMessage('Created a new checklist.');
-		$this->redirect('index', 'Standard');
+	public function createAction() {
+		if ($this->request->hasArgument('projectId') && $this->request->hasArgument('template')) {
+			$projectId = $this->request->getArgument('projectId');
+			$templateId = $this->request->getArgument('template');
+
+			$template = $this->templateRepository->findByIdentifier($templateId);
+
+			$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
+			$checklist->setProjectId($projectId);
+			$checklist->setTemplate($template);
+
+			$template->addChecklist($checklist);
+
+			$this->checklistRepository->add($checklist);
+			$this->templateRepository->update($template);
+		}
 	}
 
 	/**
