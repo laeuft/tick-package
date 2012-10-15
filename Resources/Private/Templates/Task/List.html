@@ -1,33 +1,40 @@
-<ul id="taskList">
+<div class="row" id="taskList">
 	<f:for each="{tasks}" as="task" iteration="iterator">
-		<li>
 			<f:form class="hiddenFields" method="POST" name="shiftUpForm">
 				<f:form.hidden class="task" property="task" value="{task}" />
 				<f:form.hidden class="taskgroup" property="taskgroup" value="{taskgroup}" />
 			</f:form>
 			<h5>
-				{task.name}
-				<f:link.action action="edit" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, task: task}" class="btn btn-mini btn-info">
-					Edit
-				</f:link.action>
-				<span class="shiftIcons">
-					<f:if condition="{iterator.isFirst}">
-						<f:else>
-							<span class="shiftUpTask">
-								<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
-							</span>
-						</f:else>
-					</f:if>
+				<div class="taskEntry">
+					<div class="span3">
+						{task.name} <br />
+						<h6>{task.description}</h6>
+					</div>
+					<div class="span1">
+						<f:link.action action="edit" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, task: task}" class="btn btn-mini btn-info">
+							Edit
+						</f:link.action>
+					</div>
+					<div class="span2">
+						<span class="shiftIcons">
+							<f:if condition="{iterator.isFirst}">
+								<f:else>
+									<span class="shiftUpTask">
+										<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
+									</span>
+								</f:else>
+							</f:if>
 
-					<f:if condition="{iterator.isLast}">
-						<f:else>
-							<span class="shiftDownTask">
-								<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
-							</span>
-						</f:else>
-					</f:if>
-				</span>
-			</h5> <h6>{task.description}</h6>
-		</li>
+							<f:if condition="{iterator.isLast}">
+								<f:else>
+									<span class="shiftDownTask">
+										<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
+									</span>
+								</f:else>
+							</f:if>
+						</span>
+					</div>
+				</div>
+			</h5>
 	</f:for>
-</ul>
+</div>

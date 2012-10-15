@@ -12,62 +12,75 @@
 
 	<div class="row">
 		<div class="span6">
-			<f:if condition="{taskgroup.tasks}">
-				<f:then>
-					<ul id="taskList">
+			<div class="row" id="taskList">
+				<f:if condition="{taskgroup.tasks}">
+					<f:then>
 						<f:for each="{taskgroup.tasks}" as="task" iteration="iterator">
-							<li>
-								<f:form class="hiddenFields" method="POST" name="shiftUpForm">
-									<f:form.hidden class="task" property="task" value="{task}" />
-									<f:form.hidden class="taskgroup" property="taskgroup" value="{taskgroup}" />
-								</f:form>
-								<h5>
-									{task.name}
-									<f:link.action action="edit" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, task: task}" class="btn btn-mini btn-info">
-										Edit
-									</f:link.action>
-									<span class="shiftIcons">
-										<f:if condition="{iterator.isFirst}">
-											<f:else>
-												<span class="shiftUpTask">
-													<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
-												</span>
-											</f:else>
-										</f:if>
+							<f:form class="hiddenFields" method="POST" name="shiftUpForm">
+								<f:form.hidden class="task" property="task" value="{task}" />
+								<f:form.hidden class="taskgroup" property="taskgroup" value="{taskgroup}" />
+							</f:form>
+							<h5>
+								<div class="taskEntry">
+									<div class="span3">
+										{task.name} <br />
+										<h6>{task.description}</h6>
+									</div>
+									<div class="span1">
+										<f:link.action action="edit" controller="Task" arguments="{template: taskgroup.template, taskgroup: taskgroup, task: task}" class="btn btn-mini btn-info">
+											Edit
+										</f:link.action>
+									</div>
+									<div class="span2">
+										<span class="shiftIcons">
+											<f:if condition="{iterator.isFirst}">
+												<f:else>
+													<span class="shiftUpTask">
+														<img src="{f:uri.resource(path:'Icons/arrowUp.png')}" />
+													</span>
+												</f:else>
+											</f:if>
 
-										<f:if condition="{iterator.isLast}">
-											<f:else>
-												<span class="shiftDownTask">
-													<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
-												</span>
-											</f:else>
-										</f:if>
-									</span>
-								</h5> <h6>{task.description}</h6>
-							</li>
+											<f:if condition="{iterator.isLast}">
+												<f:else>
+													<span class="shiftDownTask">
+														<img src="{f:uri.resource(path:'Icons/arrowDown.png')}" />
+													</span>
+												</f:else>
+											</f:if>
+										</span>
+									</div>
+								</div>
+							</h5>
 						</f:for>
-					</ul>
-				</f:then>
-				<f:else>
-					<p id="taskList">No tasks created yet.</p>
-				</f:else>
-			</f:if>
-			<p class="addTask">
-				<div id="showNewTaskFields" class="btn btn-primary">Create a new Task</div>
-				<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{template: template, taskgroup: taskgroup}">
-					<div class="newTaskFields">
-						<div class="taskName">
-							Name: <f:form.textfield property="name" id="name" />
+					</f:then>
+					<f:else>
+						<div class="span6">
+							<p id="taskList">No tasks created yet.</p>
 						</div>
-						<div class="taskDescription">
-							Description : <f:form.textfield property="description" id="description" />
-						</div>
-						<f:form.hidden id="template" property="template" value="{template}" />
-						<f:form.hidden id="taskgroup" property="taskgroup" value="{taskgroup}" />
-						<span id="createTask" class="btn btn-mini btn-success">Create</span>
-					</div>
-				</f:form>
-			</p>
+					</f:else>
+				</f:if>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<p class="addTask">
+						<div id="showNewTaskFields" class="btn btn-primary">Create a new Task</div>
+						<f:form id="newTaskForm" method="POST" action="create" object="{newTask}" controller="Task" name="newTask" arguments="{template: template, taskgroup: taskgroup}">
+							<div class="newTaskFields">
+								<div class="taskName">
+									Name: <f:form.textfield property="name" id="name" />
+								</div>
+								<div class="taskDescription">
+									Description : <f:form.textfield property="description" id="description" />
+								</div>
+								<f:form.hidden id="template" property="template" value="{template}" />
+								<f:form.hidden id="taskgroup" property="taskgroup" value="{taskgroup}" />
+								<span id="createTask" class="btn btn-mini btn-success">Create</span>
+							</div>
+						</f:form>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<f:link.action action="show" controller="Template" arguments="{template: template}">Back</f:link.action>
