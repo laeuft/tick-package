@@ -179,7 +179,8 @@ function reloadChecklistList(reloadParameter) {
 			jQuery('#checklistList').replaceWith(result);
 			jQuery('#ajaxLoader').dialog('close');
 
-			jQuery('#projectId').val('')
+			jQuery('#projectId').val('');
+			jQuery('#templateForChecklist').val('');
 
 			jQuery('#newChecklistForm').hide();
 		}

@@ -51,13 +51,7 @@ class ChecklistController extends ActionController {
 	* @return void
 	*/
 	public function listAction() {
-		if ($this->request->hasArgument('templateId')) {
-			$checklists = $this->checklistRepository->findByTemplate(
-				$this->request->getArgument('templateId')
-			);
-		} else {
-			$checklists = $this->checklistRepository->findAll();
-		}
+		$checklists = $this->checklistRepository->findAll();
 
 		$this->view->assign('checklists', $checklists);
 	}
