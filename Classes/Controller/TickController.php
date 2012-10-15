@@ -84,7 +84,7 @@ class TickController extends ActionController {
 	/**
 	 * Shows a form for editing an existing tick object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Tick $tick The tick to edit
+	 * @param \Laeuft\Tick\Domain\Model\Tick $tick
 	 * @return void
 	 */
 	public function editAction(Tick $tick) {
@@ -94,7 +94,7 @@ class TickController extends ActionController {
 	/**
 	 * Updates the given tick object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Tick $tick The tick to update
+	 * @param \Laeuft\Tick\Domain\Model\Tick $tick
 	 * @return void
 	 */
 	public function updateAction(Tick $tick) {
@@ -106,8 +106,8 @@ class TickController extends ActionController {
 	/**
 	 * Removes the given tick object from the tick repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Tick $tick The tick to delete
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist the tick has to be added
+	 * @param \Laeuft\Tick\Domain\Model\Tick $tick
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 * @return void
 	 */
 	public function deleteAction(Tick $tick, \Laeuft\Tick\Domain\Model\Checklist $checklist) {

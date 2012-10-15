@@ -60,8 +60,8 @@ class TaskgroupController extends ActionController {
 	/**
 	 * Shows a single taskgroup object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to show
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function showAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -102,29 +102,10 @@ class TaskgroupController extends ActionController {
 	}
 
 	/**
-	 * Adds the given new taskgroup object to the taskgroup repository
-	 *
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $newTaskgroup A new taskgroup to add
-	 * @param \Laeuft\Tick\Domain\Model\Template $tmeplate The template the taskgroup is related
-	 * @return void
-	 */
-	/*public function createAction(Taskgroup $newTaskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
-		// add the new taskgroup to the template
-		$template->addTaskgroup($newTaskgroup);
-
-		$newTaskgroup->setSortOrder($this->taskgroupRepository->getNextSortOrder($template));
-		// add the new taskgroup
-		$this->taskgroupRepository->add($newTaskgroup);
-		$this->addFlashMessage('Created a new taskgroup.');
-		// go back to the template show form
-		$this->redirect('show', 'Template', 'Laeuft.Tick', array('template' => $template));
-	}*/
-
-	/**
 	 * Shows a form for editing an existing taskgroup object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to edit
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function editAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -135,8 +116,8 @@ class TaskgroupController extends ActionController {
 	/**
 	 * Updates the given taskgroup object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to update
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the taskgroup is related
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function updateAction(Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -148,7 +129,7 @@ class TaskgroupController extends ActionController {
 	/**
 	 * Removes the given taskgroup object from the taskgroup repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The taskgroup to delete
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
 	 * @return void
 	 */
 	public function deleteAction(Taskgroup $taskgroup) {

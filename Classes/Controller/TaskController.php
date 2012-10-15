@@ -60,7 +60,7 @@ class TaskController extends ActionController {
 	/**
 	 * Shows a single task object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to show
+	 * @param \Laeuft\Tick\Domain\Model\Task $task
 	 * @return void
 	 */
 	public function showAction(Task $task) {
@@ -107,9 +107,9 @@ class TaskController extends ActionController {
 	/**
 	 * Shows a form for editing an existing task object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to edit
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The taskgrups template
+	 * @param \Laeuft\Tick\Domain\Model\Task $task
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function editAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -121,9 +121,9 @@ class TaskController extends ActionController {
 	/**
 	 * Updates the given task object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to update
-	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The taskgroups template
+	 * @param \Laeuft\Tick\Domain\Model\Task $task
+	 * @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function updateAction(Task $task, \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup, \Laeuft\Tick\Domain\Model\Template $template) {
@@ -135,7 +135,7 @@ class TaskController extends ActionController {
 	/**
 	 * Removes the given task object from the task repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Task $task The task to delete
+	 * @param \Laeuft\Tick\Domain\Model\Task $task
 	 * @return void
 	 */
 	public function deleteAction(Task $task) {
@@ -146,11 +146,6 @@ class TaskController extends ActionController {
 
 	/**
 	* Shift the selected task and change the sort order of all affected tasks
-	*
-	* @param \Laeuft\Tick\Domain\Model\Task $taskToShift
-	* @param \Laeuft\Tick\Domain\Model\Taskgroup $taskgroup The tasks taskgroup
-	* @param \Laeuft\Tick\Domain\Model\Template $template The taskgruops template
-	* @param integer $newValue
 	*
 	* @return void
 	*/

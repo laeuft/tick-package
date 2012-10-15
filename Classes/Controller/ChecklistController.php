@@ -42,7 +42,7 @@ class ChecklistController extends ActionController {
 	/**
 	 * Shows a single checklist object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist to show
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 * @return void
 	 */
 	public function showAction(Checklist $checklist) {
@@ -55,14 +55,6 @@ class ChecklistController extends ActionController {
 				$counter++;
 			}
 		}
-
-/*foreach($arrTaskgroups as $taskgroupName => $tasks) {
-	echo $taskgroupName . '<br>';
-
-	foreach($tasks as $task) {
-
-	}
-}*/
 
 		$this->view->assign('taskgroups', $arrTaskgroups);
 		$this->view->assign('checklist', $checklist);
@@ -80,8 +72,8 @@ class ChecklistController extends ActionController {
 	/**
 	 * Adds the given new checklist object to the checklist repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $newChecklist A new checklist to add
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template the Checklist is related
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $newChecklist
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function createAction(Checklist $newChecklist) {
@@ -94,7 +86,7 @@ class ChecklistController extends ActionController {
 	/**
 	 * Shows a form for editing an existing checklist object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist to edit
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 * @return void
 	 */
 	public function editAction(Checklist $checklist) {
@@ -104,7 +96,7 @@ class ChecklistController extends ActionController {
 	/**
 	 * Updates the given checklist object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist to update
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 * @return void
 	 */
 	public function updateAction(Checklist $checklist) {
@@ -116,7 +108,7 @@ class ChecklistController extends ActionController {
 	/**
 	 * Removes the given checklist object from the checklist repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist The checklist to delete
+	 * @param \Laeuft\Tick\Domain\Model\Checklist $checklist
 	 * @return void
 	 */
 	public function deleteAction(Checklist $checklist) {

@@ -12,7 +12,7 @@ use TYPO3\FLOW3\Mvc\Controller\ActionController;
 use \Laeuft\Tick\Domain\Model\User;
 
 /**
- * User controller for the Laeuft.Tick package 
+ * User controller for the Laeuft.Tick package
  *
  * @FLOW3\Scope("singleton")
  */
@@ -36,7 +36,7 @@ class UserController extends ActionController {
 	/**
 	 * Shows a single user object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\User $user The user to show
+	 * @param \Laeuft\Tick\Domain\Model\User $user
 	 * @return void
 	 */
 	public function showAction(User $user) {
@@ -54,7 +54,7 @@ class UserController extends ActionController {
 	/**
 	 * Adds the given new user object to the user repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\User $newUser A new user to add
+	 * @param \Laeuft\Tick\Domain\Model\User $newUser
 	 * @return void
 	 */
 	public function createAction(User $newUser) {
@@ -66,7 +66,7 @@ class UserController extends ActionController {
 	/**
 	 * Shows a form for editing an existing user object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\User $user The user to edit
+	 * @param \Laeuft\Tick\Domain\Model\User $user
 	 * @return void
 	 */
 	public function editAction(User $user) {
@@ -76,7 +76,7 @@ class UserController extends ActionController {
 	/**
 	 * Updates the given user object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\User $user The user to update
+	 * @param \Laeuft\Tick\Domain\Model\User $user
 	 * @return void
 	 */
 	public function updateAction(User $user) {
@@ -88,7 +88,7 @@ class UserController extends ActionController {
 	/**
 	 * Removes the given user object from the user repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\User $user The user to delete
+	 * @param \Laeuft\Tick\Domain\Model\User $user
 	 * @return void
 	 */
 	public function deleteAction(User $user) {

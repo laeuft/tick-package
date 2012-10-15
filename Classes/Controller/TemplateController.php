@@ -58,7 +58,7 @@ class TemplateController extends ActionController {
 	/**
 	 * Shows a single template object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template to show
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function showAction(Template $template) {
@@ -101,21 +101,9 @@ class TemplateController extends ActionController {
 	}
 
 	/**
-	 * Adds the given new template object to the template repository
-	 *
-	 * @param \Laeuft\Tick\Domain\Model\Template $newTemplate A new template to add
-	 * @return void
-	 */
-	/* public function createAction(Template $newTemplate) {
-		$this->templateRepository->add($newTemplate);
-		$this->addFlashMessage('Created a new template.');
-		$this->redirect('index', 'Standard');
-	} */
-
-	/**
 	 * Shows a form for editing an existing template object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template to edit
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function editAction(Template $template) {
@@ -125,7 +113,7 @@ class TemplateController extends ActionController {
 	/**
 	 * Updates the given template object
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template to update
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function updateAction(Template $template) {
@@ -137,7 +125,7 @@ class TemplateController extends ActionController {
 	/**
 	 * Removes the given template object from the template repository
 	 *
-	 * @param \Laeuft\Tick\Domain\Model\Template $template The template to delete
+	 * @param \Laeuft\Tick\Domain\Model\Template $template
 	 * @return void
 	 */
 	public function deleteAction(Template $template) {
