@@ -3,9 +3,18 @@
 		<div id="checklistList">
 			<f:for each="{checklists}" as="checklist">
 				<div class="checklistEntry">
-					<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">
-						{checklist.projectId} - {checklist.template.name}
-					</f:link.action>
+					<f:if condition="{checklist.checklistStatus} == 1">
+							<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">
+								{checklist.projectId} - {checklist.template.name} - ongoing
+							</f:link.action>
+					</f:if>
+					<f:if condition="{checklist.checklistStatus} == 2">
+						<f:then>
+							<f:link.action action="show" controller="Checklist" arguments="{checklist: checklist}">
+								{checklist.projectId} - {checklist.template.name} - finished
+							</f:link.action>
+						</f:then>
+					</f:if>
 				</div>
 			</f:for>
 		</div>

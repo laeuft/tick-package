@@ -43,6 +43,12 @@ class Checklist {
 	 */
 	protected $ticks;
 
+	/**
+	 * The checklist status
+	 * @var integer
+	 */
+	protected $checklistStatus;
+
 
 	/**
 	* Initiates a new tick to this checklist
@@ -137,6 +143,25 @@ class Checklist {
 	public function addTick(\Laeuft\Tick\Domain\Model\Tick $tick) {
 		$tick->setChecklist($this);
 		$this->ticks->add($tick);
+	}
+
+	/**
+	 * Get the Checklist's status
+	 *
+	 * @return integer The Checklist's status
+	 */
+	public function getChecklistStatus() {
+		return $this->checklistStatus;
+	}
+
+	/**
+	 * Sets this Checklist's status
+	 *
+	 * @param integer $checklistStatus The Checklist's status
+	 * @return void
+	 */
+	public function setChecklistStatus($checklistStatus) {
+		$this->checklistStatus = $checklistStatus;
 	}
 
 }

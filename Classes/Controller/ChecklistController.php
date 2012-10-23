@@ -101,6 +101,7 @@ class ChecklistController extends ActionController {
 			$checklist = new \Laeuft\Tick\Domain\Model\Checklist();
 			$checklist->setProjectId($projectId);
 			$checklist->setTemplate($template);
+			$checklist->setChecklistStatus(1);
 
 			$template->addChecklist($checklist);
 
