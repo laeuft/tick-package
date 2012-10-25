@@ -1,0 +1,28 @@
+{
+    "name": "laeuft/tick",
+	"type": "typo3-flow-package",
+    "description" : "Create checklist based on templates",
+    "license": "LGPL-3.0+",
+	"authors": [
+		{
+			"name": "Pascal Maechler",
+			"email": "1989.pascal@gmail.com",
+			"homepage": "http://www.internezzo.ch",
+			"role": "Lead Developer"
+		}
+	],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://ci.typo3.robertlemke.net/job/composer-packages/ws/repository/"
+        }
+    ],
+    "require": {
+        "typo3/flow": "*"
+	},
+	"autoload": {
+		"psr-0": {
+			"Laeuft\\Tick": "Classes"
+		}
+	}
+}
