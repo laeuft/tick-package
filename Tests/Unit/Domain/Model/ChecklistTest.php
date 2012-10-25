@@ -9,7 +9,7 @@ namespace Laeuft\Tick\Tests\Unit\Domain\Model;
 /**
  * Testcase for Checklist
  */
-class ChecklistTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
+class ChecklistTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test

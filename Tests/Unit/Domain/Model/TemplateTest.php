@@ -9,7 +9,7 @@ namespace Laeuft\Tick\Tests\Unit\Domain\Model;
 /**
  * Testcase for Template
  */
-class TemplateTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
+class TemplateTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
