@@ -3,39 +3,49 @@
 <f:section name="Title">Show checklist "{checklist.projectId}"</f:section>
 
 <f:section name="Content">
-	<table>
-		<tr>
-			<th>Name</th>
-			<td>{checklist.projectId}</td>
-		</tr>
-	</table>
-	<f:if condition="{taskgroups}">
-		<f:for each="{taskgroups}" as="tasks" key="taskgroupName">
-			<table>
-				<tr>
-					<td colspan="2">
-						<b>{taskgroupName}</b>
-					</td>
-				</tr>
-				<f:for each="{tasks}" as="task">
+	<div id="checklist">
+		<div class="row">
+			<div class="span12">
+				<table>
 					<tr>
-						<td>
-							<f:if condition="{task.tick}">
-								<f:then>
-									<f:link.action class="btn btn-mini error" action="delete" controller="Tick" arguments="{checklist: checklist, tick: task.tick}">Untick</f:link.action>
-								</f:then>
-								<f:else>
-									<f:link.action class="btn btn-mini btn-success" action="create" controller="Tick" arguments="{checklist: checklist, task: task.task}">Tick</f:link.action>
-								</f:else>
-							</f:if>
-						</td>
-						<td>
-							{task.task.name} {task.task.description}
-						</td>
+						<th>Name</th>
+						<td>{checklist.projectId}</td>
 					</tr>
-				</f:for>
-			</table>
-		</f:for>
-	</f:if>
-	<f:link.action action="index" controller="Standard">Back</f:link.action>
+				</table>
+				<f:if condition="{taskgroups}">
+					<f:for each="{taskgroups}" as="tasks" key="taskgroupName">
+						<div class="taskgroupWrapper">
+							<div class="taskgroupTitle">
+								<b>{taskgroupName}</b>
+							</div>
+							<f:for each="{tasks}" as="task">
+								<div class="taskWrapper">
+									<div class="tick">
+										<f:if condition="{task.tick}">
+											<f:then>
+												<span class="ticked">
+													<img src="{f:uri.resource(path:'Icons/ticked.png')}" />
+												</span>
+											</f:then>
+											<f:else>
+												<span class="unticked">
+													<img src="{f:uri.resource(path:'Icons/unticked.png')}" />
+												</span>
+											</f:else>
+										</f:if>
+									</div>
+									<div class="task">
+										{task.task.name} {task.task.description}
+									</div>
+								</div>
+							</f:for>
+						</div>
+					</f:for>
+				</f:if>
+				<div id="backLink">
+					<f:link.action action="index" controller="Standard">Back</f:link.action>
+				</div>
+			</div>
+		</div>
+	</div>
 </f:section>
